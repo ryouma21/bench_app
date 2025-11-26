@@ -52,6 +52,7 @@
   color: #f97373;
   border: 1px solid #f97373;
   }
+/*
   .footer-nav {
   border-top: 1px solid #1f2933;
   background: #020617;
@@ -65,6 +66,7 @@
   text-align: center;
   }
   .nav-item.active { color: #f97373; }
+*/
 </style>
 
 <div class="container">
@@ -84,24 +86,9 @@
   <button class="btn btn-outline" id="change-btn">別のメニューを見る</button>
 </div>
 
-<div class="footer-nav">
+<!--<div class="footer-nav">
   <div class="nav-item active">🏠<br/>ホーム</div>
   <div class="nav-item">📊<br/>記録</div>
   <div class="nav-item">🧍<br/>フォーム</div>
 </div>
-
-<script>
-  const menus = [
-    {main: "ベンチプレス 75kg × 5回 × 4セット", sub: "休憩：2〜3分 / RPE：8", adv: "肩をすくめず胸を張る意識。"},
-    {main: "ベンチプレス 70kg × 8回 × 3セット", sub: "フォーム重視", adv: "ゆっくり下ろして丁寧に上げる。"},
-    {main: "ベンチプレス 80kg × 3回 × 5セット", sub: "重めの日", adv: "足で床を強く踏んで安定させる。"}
-  ];
-  let idx = 0;
-  document.getElementById("change-btn").onclick = () => {
-    idx = (idx + 1) % menus.length;
-    document.getElementById("menu-main").textContent = menus[idx].main;
-    document.getElementById("menu-sub").textContent = menus[idx].sub;
-    document.getElementById("advice").textContent = menus[idx].adv;
-  };
-  document.getElementById("start-btn").onclick = () => alert("トレーニング開始！");
-</script>
+-->
