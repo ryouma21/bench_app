@@ -11,6 +11,26 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="global-header">
+      <div class="header-inner">
+        <div class="header-left">
+          <%= link_to "BenchApp", root_path, class: "header-logo" %>
+        </div>
+        <nav class="header-right">
+          <% if user_signed_in? %>
+            <span class="header-user">
+              こんにちは、<%= current_user.nickname %> さん！
+            </span>
+            <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } ,class: "header-link header-link--danger"%>
+          <% else %>
+            <%= link_to "ログイン", new_user_session_path , class: "header-link" %>
+            <%= link_to "新規登録", new_user_registration_path ,class: "header-link header-link--primary" %>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+    <main class="main-content">
+      <%= yield %>
+    </main>
   </body>
 </html>
