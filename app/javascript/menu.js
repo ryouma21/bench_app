@@ -20,16 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // ✅ 別のメニューを見るボタン
   if (changeBtn) {
     changeBtn.addEventListener("click", changeMenu);
-    changeBtn.addEventListener("touchstart", changeMenu);
   }
 
   // ✅ 開始ボタン
   if (startBtn) {
     startBtn.addEventListener("click", () => {
-      alert("トレーニング開始！");
-    });
-
-    startBtn.addEventListener("touchstart", () => {
       alert("トレーニング開始！");
     });
   }
