@@ -11,6 +11,51 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="global-header">
+      <div class="header-inner">
+        <div class="header-left">
+          <%= link_to "BenchApp", root_path, class: "header-logo" %>
+        </div>
+        <nav class="header-right">
+          <% if user_signed_in? %>
+            <span class="header-user">
+              こんにちは、<%= current_user.nickname %> さん！
+            </span>
+            <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } ,class: "header-link header-link--danger"%>
+          <% else %>
+            <%= link_to "ログイン", new_user_session_path , class: "header-link" %>
+            <%= link_to "新規登録", new_user_registration_path ,class: "header-link header-link--primary" %>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+    <main class="main-content">
+      <%= yield %>
+    </main>
+    <footer class="global-footer">
+      <div class="footer-inner">
+        <%= link_to root_path, class: "footer-item" do %>
+          <div class="footer-icon">🏠</div>
+          <div class="footer-text">ホーム</div>
+        <% end %>
+
+        <% if user_signed_in? %>
+          <%= link_to "#", class: "footer-item" do %>
+            <div class="footer-icon">📘</div>
+            <div class="footer-text">記録</div>
+          <% end %>
+
+          <%= link_to "#", class: "footer-item" do %>
+            <div class="footer-icon">📝</div>
+            <div class="footer-text">フォーム</div>
+          <% end %>
+        <% else %>
+          <%= link_to new_user_session_path, class: "footer-item" do %>
+            <div class="footer-icon">🔐</div>
+            <div class="footer-text">ログイン</div>
+          <% end %>
+        <% end %>
+      </div>
+    </footer>
   </body>
 </html>
