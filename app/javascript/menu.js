@@ -1,4 +1,4 @@
-document.addEventListener("turbo:load", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
   const menus = [
     {main: "ベンチプレス 75kg × 5回 × 4セット", sub: "休憩：2〜3分 / RPE：8", adv: "肩をすくめず胸を張る意識。"},
@@ -11,17 +11,26 @@ document.addEventListener("turbo:load", () => {
   const changeBtn = document.getElementById("change-btn");
   const startBtn  = document.getElementById("start-btn");
 
+  function changeMenu() {
+    idx = (idx + 1) % menus.length;
+    document.getElementById("menu-main").textContent = menus[idx].main;
+    document.getElementById("menu-sub").textContent  = menus[idx].sub;
+    document.getElementById("advice").textContent    = menus[idx].adv;
+  }
+    // ✅ 別のメニューを見るボタン
   if (changeBtn) {
-    changeBtn.onclick = () => {
-      idx = (idx + 1) % menus.length;
-      document.getElementById("menu-main").textContent = menus[idx].main;
-      document.getElementById("menu-sub").textContent  = menus[idx].sub;
-      document.getElementById("advice").textContent    = menus[idx].adv;
-    };
+    changeBtn.addEventListener("click", changeMenu);
+    changeBtn.addEventListener("touchstart", changeMenu);
   }
 
+  // ✅ 開始ボタン
   if (startBtn) {
-    startBtn.onclick = () => alert("トレーニング開始！");
-  }
+    startBtn.addEventListener("click", () => {
+      alert("トレーニング開始！");
+    });
 
+    startBtn.addEventListener("touchstart", () => {
+      alert("トレーニング開始！");
+    });
+  }
 });
