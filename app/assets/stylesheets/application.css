@@ -104,3 +104,104 @@
 .main-content {
   padding-bottom: 70px; /* フッター高さの分だけ余白を作る */
 }
+
+.footer-item:hover {
+  background-color: #222;
+  border-radius: 8px;
+}
+
+.footer-item:hover .footer-text {
+  color: #ff6b6b;
+}
+
+.footer-item:hover .footer-icon {
+  opacity: 0.7;
+}
+/* =========================
+  Header Styling
+========================= */
+.global-header {
+  background-color: #111;
+  padding: 10px 0;
+  border-bottom: 1px solid #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ----- Logo ----- */
+.header-logo {
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Hover for logo */
+.header-logo:hover {
+  color: #ff6b6b; /* 赤系。あなたのテーマ色 */
+}
+
+/* ----- Right side links ----- */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-user {
+  color: #ddd;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+/* ----- Buttons ----- */
+.header-link {
+  padding: 5px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #444;
+  transition: 0.2s;
+}
+
+.header-link--primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.header-link--danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+/* ----- Hover effects ----- */
+.header-link:hover {
+  background-color: #333;
+  border-color: #555;
+}
+
+.header-link--primary:hover {
+  background-color: #0b5cd3;
+}
+
+.header-link--danger:hover {
+  background-color: #b52a38;
+}
+
+/* main に余白（ヘッダー固定分） */
+.main-content {
+  padding-top: 70px;
+}
