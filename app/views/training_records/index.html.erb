@@ -1,5 +1,9 @@
 <h1>記録一覧</h1>
 
+<div class="add-button-area">
+  <%= link_to "＋ 記録を追加", new_training_record_path, class: "add-button" %>
+</div>
+
 <% @training_records.each do |record| %>
   <p>
     <%= record.training_date %> /
@@ -8,3 +12,18 @@
     <%= record.sets %>セット
   </p>
 <% end %>
+
+<style>
+  .add-button-area {
+    margin-bottom: 16px;
+  }
+  .add-button {
+    display: inline-block;
+    background: #2563eb;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+</style>
