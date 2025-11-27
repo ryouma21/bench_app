@@ -1,0 +1,10 @@
+<h1>記録一覧</h1>
+
+<% @training_records.each do |record| %>
+  <p>
+    <%= record.training_date %> /
+    <%= record.weight %>kg ×
+    <%= record.reps %>回 ×
+    <%= record.sets %>セット
+  </p>
+<% end %>
