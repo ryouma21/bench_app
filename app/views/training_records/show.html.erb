@@ -1,0 +1,109 @@
+<h1 class="page-title">記録詳細</h1>
+
+<div class="record-card">
+
+  <div class="record-header">
+    <span class="record-date">
+      <%= @training_record.training_date.strftime("%Y/%m/%d") %>
+    </span>
+  </div>
+
+  <div class="record-body">
+
+    <div class="record-main">
+      <span class="weight"><%= @training_record.weight %>kg</span>
+      <span class="reps">× <%= @training_record.reps %>回</span>
+      <span class="sets">× <%= @training_record.sets %>セット</span>
+    </div>
+
+    <div class="record-sub">
+      総ボリューム：<%= @training_record.total_volume %>
+    </div>
+
+    <% if @training_record.fatigue_level.present? %>
+      <div class="record-fatigue">
+        疲労度：<%= @training_record.fatigue_level %>
+      </div>
+    <% end %>
+
+    <% if @training_record.advice.present? %>
+      <div class="record-advice">
+        メモ：<%= @training_record.advice %>
+      </div>
+    <% end %>
+
+  </div>
+
+  <div class="record-actions">
+    <%= link_to "編集", edit_training_record_path(@training_record), class: "edit-btn" %>
+    <%= link_to "削除", training_record_path(@training_record), 
+      method: :delete, 
+      data: { confirm: "本当に削除しますか？" },
+      class: "delete-btn" 
+    %>
+  </div>
+
+</div>
+
+
+<style>
+  body {
+    background: #050814;
+  }
+
+  .page-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: #f4f4f4;
+  }
+
+  .record-card {
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 16px;
+    margin-top: 10px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .record-header {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #cbd5e1;
+  }
+
+  .record-main {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+
+  .record-sub, .record-fatigue, .record-advice {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #e2e8f0;
+  }
+
+  .record-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .edit-btn {
+    background: #2563eb;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+
+  .delete-btn {
+    background: #ef4444;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+</style>

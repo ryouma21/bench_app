@@ -9,6 +9,11 @@ class TrainingRecordsController < ApplicationController
     @training_records = current_user.training_records.order(training_date: :desc)
   end
 
+  def show
+    @training_record = TrainingRecord.find(params[:id])
+  end
+
+
 
   def create
     @training_record = current_user.training_records.new(training_record_params)
