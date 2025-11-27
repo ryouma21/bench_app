@@ -13,7 +13,19 @@ class TrainingRecordsController < ApplicationController
     @training_record = TrainingRecord.find(params[:id])
   end
 
+  def edit
+    @training_record = TrainingRecord.find(params[:id])
+  end
 
+  def update
+    @training_record = TrainingRecord.find(params[:id])
+
+    if @training_record.update(training_record_params)
+      redirect_to training_record_path(@training_record), notice: "記録を更新しました！"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   def create
     @training_record = current_user.training_records.new(training_record_params)
