@@ -27,6 +27,13 @@ class TrainingRecordsController < ApplicationController
     end
   end
 
+  def destroy
+    @training_record = TrainingRecord.find(params[:id])
+    @training_record.destroy
+    redirect_to training_records_path, notice: "記録を削除しました。"
+  end
+
+
   def create
     @training_record = current_user.training_records.new(training_record_params)
 
