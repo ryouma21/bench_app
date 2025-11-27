@@ -13,62 +13,7 @@
  *= require_tree .
  *= require_self
  */
-.global-header {
-  background-color: #222;
-  color: #fff;
-  padding: 8px 0;
-}
 
-.header-inner {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header-logo {
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #fff;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.header-user {
-  font-size: 14px;
-}
-
-.header-link {
-  font-size: 14px;
-  text-decoration: none;
-  border: 1px solid #fff;
-  border-radius: 4px;
-  padding: 4px 10px;
-  color: #fff;
-}
-
-.header-link--primary {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-}
-
-.header-link--danger {
-  background-color: #dc3545;
-  border-color: #dc3545;
-}
-
-.main-content {
-  max-width: 960px;
-  margin: 16px auto;
-  padding: 0 16px;
-}
 
 .global-footer {
   position: fixed;
@@ -101,9 +46,6 @@
 .footer-text {
   margin-top: 2px;
 }
-.main-content {
-  padding-bottom: 70px; /* フッター高さの分だけ余白を作る */
-}
 
 .footer-item:hover {
   background-color: #222;
@@ -117,94 +59,7 @@
 .footer-item:hover .footer-icon {
   opacity: 0.7;
 }
-/* =========================
-  Header Styling
-========================= */
-.global-header {
-  background-color: #111;
-  padding: 10px 0;
-  border-bottom: 1px solid #333;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-}
 
-.header-inner {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* ----- Logo ----- */
-.header-logo {
-  font-size: 22px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #fff;
-}
-
-/* Hover for logo */
-.header-logo:hover {
-  color: #ff6b6b; /* 赤系。あなたのテーマ色 */
-}
-
-/* ----- Right side links ----- */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.header-user {
-  color: #ddd;
-  font-size: 14px;
-  margin-right: 10px;
-}
-
-/* ----- Buttons ----- */
-.header-link {
-  padding: 5px 12px;
-  font-size: 14px;
-  border-radius: 5px;
-  text-decoration: none;
-  background-color: #222;
-  color: #fff;
-  border: 1px solid #444;
-  transition: 0.2s;
-}
-
-.header-link--primary {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-}
-
-.header-link--danger {
-  background-color: #dc3545;
-  border-color: #dc3545;
-}
-
-/* ----- Hover effects ----- */
-.header-link:hover {
-  background-color: #333;
-  border-color: #555;
-}
-
-.header-link--primary:hover {
-  background-color: #0b5cd3;
-}
-
-.header-link--danger:hover {
-  background-color: #b52a38;
-}
-
-/* main に余白（ヘッダー固定分） */
-.main-content {
-  padding-top: 70px;
-}
 /* =============================
     Auth Pages (Login / Signup)
 ============================= */
@@ -217,7 +72,6 @@ body {
 .auth-container {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
   padding: 20px;
 }
 
@@ -293,4 +147,84 @@ body {
 
 .auth-link:hover {
   text-decoration: underline;
+}
+/* ===== レイアウト統一（最終版） ===== */
+
+/* ヘッダー */
+.global-header {
+  height: 60px;
+  background-color: #111;
+  border-bottom: 1px solid #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* メインコンテンツ */
+.main-content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 70px 16px 80px;
+  min-height: 100vh;
+}
+/* ===== ヘッダーの見た目を復活 ===== */
+
+/* ロゴ */
+.header-logo {
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+}
+
+.header-logo:hover {
+  color: #ff6b6b;
+}
+
+/* 右側（ログイン・新規登録） */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ボタン基本 */
+.header-link {
+  padding: 6px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #fff;
+  background: #222;
+  border: 1px solid #444;
+  transition: 0.2s;
+}
+
+/* 新規登録 */
+.header-link--primary {
+  background: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* ログアウト */
+.header-link--danger {
+  background: #dc3545;
+  border-color: #dc3545;
+}
+
+/* ホバー時 */
+.header-link:hover {
+  background: #333;
 }
