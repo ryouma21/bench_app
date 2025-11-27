@@ -8,6 +8,7 @@
   <div class="record-card">
     <span class="record-date"><%= record.training_date.strftime("%Y/%m/%d") %></span>
     <div class="record-header">
+      <%= link_to "詳細", training_record_path(record), class: "detail-link" %>
       <%= link_to "編集", edit_training_record_path(record), class: "edit-link" %>
     </div>
 
@@ -106,4 +107,21 @@
     color: #94a3b8;
     margin-top: 4px;
   }
+  <style>
+  .record-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .detail-link {
+    font-size: 12px;
+    color: #38bdf8;   /* 青 */
+    text-decoration: none;
+  }
+  .edit-link {
+    font-size: 12px;
+    color: #34d399;   /* 緑 */
+    text-decoration: none;
+  }
+</style>
+
 </style>
