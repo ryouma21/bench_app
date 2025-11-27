@@ -1,0 +1,39 @@
+<h1>記録を追加する</h1>
+
+<%= form_with model: @training_record, local: true do |f| %>
+
+  <div>
+    <%= f.label :training_date, "日付" %><br>
+    <%= f.date_field :training_date %>
+  </div>
+
+  <div>
+    <%= f.label :weight, "重量(kg)" %><br>
+    <%= f.number_field :weight %>
+  </div>
+
+  <div>
+    <%= f.label :reps, "回数" %><br>
+    <%= f.number_field :reps %>
+  </div>
+
+  <div>
+    <%= f.label :sets, "セット数" %><br>
+    <%= f.number_field :sets %>
+  </div>
+
+  <div>
+    <%= f.label :fatigue_level, "疲労度(任意)" %><br>
+    <%= f.number_field :fatigue_level %>
+  </div>
+
+  <div>
+    <%= f.label :advice, "メモ・アドバイス(任意)" %><br>
+    <%= f.text_field :advice %>
+  </div>
+
+  <div>
+    <%= f.submit "保存する" %>
+  </div>
+
+<% end %>
