@@ -5,6 +5,11 @@ class TrainingRecordsController < ApplicationController
     @training_record = TrainingRecord.new
   end
 
+  def index
+    @training_records = current_user.training_records.order(training_date: :desc)
+  end
+
+
   def create
     @training_record = current_user.training_records.new(training_record_params)
 
