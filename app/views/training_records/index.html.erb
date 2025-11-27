@@ -5,15 +5,45 @@
 </div>
 
 <% @training_records.each do |record| %>
-  <p>
-    <%= record.training_date %> /
-    <%= record.weight %>kg ×
-    <%= record.reps %>回 ×
-    <%= record.sets %>セット
-  </p>
+  <div class="record-card">
+
+    <div class="record-header">
+      <span class="record-date"><%= record.training_date.strftime("%Y/%m/%d") %></span>
+      <%= link_to "編集", edit_training_record_path(record), class: "edit-link" %>
+    </div>
+
+    <div class="record-body">
+      <div class="record-main">
+        <span class="weight"><%= record.weight %>kg</span>
+        <span class="reps">× <%= record.reps %>回</span>
+        <span class="sets">× <%= record.sets %>セット</span>
+      </div>
+
+      <div class="record-sub">
+        総ボリューム：<%= record.total_volume %>
+      </div>
+
+      <% if record.advice.present? %>
+        <div class="record-advice">
+          メモ：<%= record.advice %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 <% end %>
 
 <style>
+   body {
+    background: #050814;
+  }
+
+  .page-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: #f4f4f4;
+  }
+
   .add-button-area {
     margin-bottom: 16px;
   }
@@ -25,5 +55,49 @@
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
+  }
+
+  .record-card {
+    background: #0f172a;
+    padding: 16px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .record-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .record-date {
+    color: #cbd5e1;
+  }
+
+  .edit-link {
+    font-size: 12px;
+    color: #38bdf8;
+    text-decoration: none;
+  }
+
+  .record-main {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+
+  .record-sub {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #e2e8f0;
+  }
+
+  .record-advice {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 4px;
   }
 </style>
