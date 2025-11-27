@@ -37,8 +37,7 @@
   <div class="record-actions">
     <%= link_to "編集", edit_training_record_path(@training_record), class: "edit-btn" %>
     <%= link_to "削除", training_record_path(@training_record), 
-      method: :delete, 
-      data: { confirm: "本当に削除しますか？" },
+      data: {  turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
       class: "delete-btn" 
     %>
   </div>
