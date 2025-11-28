@@ -57,6 +57,10 @@ body {
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  max-width: 420px;  /* ← 追加 */
+  width: 100%;        /* ← 追加 */
+  margin-left: auto;  /* ← 追加 */
+  margin-right: auto; /* ← 追加 */
 }
 /* =============================
     戻るボタン（共通デザイン）
@@ -81,20 +85,21 @@ body {
     オレンジボタン（共通デザイン）
 ============================= */
 .btn-primary {
+  display: block;
   width: 100%;
-  padding: 14px 0;
+  padding: 16px 0;
   text-align: center;
   border-radius: 999px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
 
   background: linear-gradient(135deg, #f97373, #fb923c);
-  color: #ffffff;
+  color: #fff;
   text-decoration: none;
 
   box-shadow: 0 8px 18px rgba(248, 113, 113, 0.4);
-  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.1s ease;
+  transition: transform 0.08s ease,
 }
 
 .btn-primary:hover {
