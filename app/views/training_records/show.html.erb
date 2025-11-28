@@ -1,0 +1,53 @@
+<div class="main-content">
+  <div class="container">
+
+    <h1 class="page-title">記録詳細</h1>
+
+    <div class="card record-card">
+
+      <div class="record-header">
+        <span class="record-date">
+          <%= @training_record.training_date.strftime("%Y/%m/%d") %>
+        </span>
+      </div>
+
+      <div class="record-body">
+
+        <div class="record-main">
+          <span><%= @training_record.weight %>kg</span>
+          <span>× <%= @training_record.reps %>回</span>
+          <span>× <%= @training_record.sets %>セット</span>
+        </div>
+
+        <div class="record-sub">
+          総ボリューム：<%= @training_record.total_volume %>
+        </div>
+
+        <% if @training_record.fatigue_level.present? %>
+          <div class="record-fatigue">
+            疲労度：<%= @training_record.fatigue_level %>
+          </div>
+        <% end %>
+
+        <% if @training_record.advice.present? %>
+          <div class="record-advice">
+            メモ：<%= @training_record.advice %>
+          </div>
+        <% end %>
+
+      </div>
+
+      <div class="record-actions">
+        <%= link_to "編集", edit_training_record_path(@training_record), class: "btn-primary" %>
+        <%= link_to "削除", training_record_path(@training_record),
+          data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+          class: "btn-danger"
+        %>
+      </div>
+
+      <div class="back-area">
+        <%= link_to "← 一覧に戻る", training_records_path, class: "btn-back" %>
+      </div>
+    </div>
+  </div>
+</div>

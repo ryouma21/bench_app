@@ -13,284 +13,102 @@
  *= require_tree .
  *= require_self
  */
-.global-header {
-  background-color: #222;
-  color: #fff;
-  padding: 8px 0;
-}
 
-.header-inner {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
-.header-logo {
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #fff;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.header-user {
-  font-size: 14px;
-}
-
-.header-link {
-  font-size: 14px;
-  text-decoration: none;
-  border: 1px solid #fff;
-  border-radius: 4px;
-  padding: 4px 10px;
-  color: #fff;
-}
-
-.header-link--primary {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-}
-
-.header-link--danger {
-  background-color: #dc3545;
-  border-color: #dc3545;
-}
-
-.main-content {
-  max-width: 960px;
-  margin: 16px auto;
-  padding: 0 16px;
-}
-
-.global-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #111;
-  border-top: 1px solid #333;
-  padding: 6px 0;
-}
-
-.footer-inner {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.footer-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: #fff;
-  font-size: 12px;
-}
-
-.footer-icon {
-  font-size: 18px;
-}
-
-.footer-text {
-  margin-top: 2px;
-}
-.main-content {
-  padding-bottom: 70px; /* フッター高さの分だけ余白を作る */
-}
-
-.footer-item:hover {
-  background-color: #222;
-  border-radius: 8px;
-}
-
-.footer-item:hover .footer-text {
-  color: #ff6b6b;
-}
-
-.footer-item:hover .footer-icon {
-  opacity: 0.7;
-}
-/* =========================
-  Header Styling
-========================= */
-.global-header {
-  background-color: #111;
-  padding: 10px 0;
-  border-bottom: 1px solid #333;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-.header-inner {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* ----- Logo ----- */
-.header-logo {
-  font-size: 22px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #fff;
-}
-
-/* Hover for logo */
-.header-logo:hover {
-  color: #ff6b6b; /* 赤系。あなたのテーマ色 */
-}
-
-/* ----- Right side links ----- */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.header-user {
-  color: #ddd;
-  font-size: 14px;
-  margin-right: 10px;
-}
-
-/* ----- Buttons ----- */
-.header-link {
-  padding: 5px 12px;
-  font-size: 14px;
-  border-radius: 5px;
-  text-decoration: none;
-  background-color: #222;
-  color: #fff;
-  border: 1px solid #444;
-  transition: 0.2s;
-}
-
-.header-link--primary {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-}
-
-.header-link--danger {
-  background-color: #dc3545;
-  border-color: #dc3545;
-}
-
-/* ----- Hover effects ----- */
-.header-link:hover {
-  background-color: #333;
-  border-color: #555;
-}
-
-.header-link--primary:hover {
-  background-color: #0b5cd3;
-}
-
-.header-link--danger:hover {
-  background-color: #b52a38;
-}
-
-/* main に余白（ヘッダー固定分） */
-.main-content {
-  padding-top: 70px;
-}
 /* =============================
-    Auth Pages (Login / Signup)
+    Reset & Global
+============================= */
+body {
+  margin: 0;
+  padding: 0;
+  background: #050811;
+  color: #ffffff;
+  font-family: system-ui, sans-serif;
+}
+
+/* =============================
+    Layout
 ============================= */
 
-body {
-  background-color: #0a0f1b; /* アプリのホームと同じ色 */
-  color: #fff;
+/* メインコンテンツ領域（ヘッダー下） */
+.main-content {
+  max-width: 480px; /* ← ここ統一！ */
+  margin: 0 auto;
+  padding: 70px 16px 80px; /* ヘッダーとフッター分の余白 */
+  min-height: 100vh;
 }
 
-.auth-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
+/* 共通コンテナ（フォームなどで使用） */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
-.auth-card {
-  background-color: #141926;
-  padding: 30px;
-  border-radius: 12px;
-  width: 420px;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.auth-title {
-  text-align: center;
+/* =============================
+    Card（共通カードデザイン）
+============================= */
+.card {
+  background: #0f172a;
+  border-radius: 20px;
+  padding: 20px;
   margin-bottom: 20px;
-  font-size: 22px;
-  font-weight: bold;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  max-width: 420px;  /* ← 追加 */
+  width: 100%;        /* ← 追加 */
+  margin-left: auto;  /* ← 追加 */
+  margin-right: auto; /* ← 追加 */
 }
-
-.auth-field {
-  margin-bottom: 15px;
-}
-
-.auth-field label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 14px;
-  color: #cdd4e7;
-}
-
-.auth-input {
+/* =============================
+    戻るボタン（共通デザイン）
+============================= */
+.btn-back {
   width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #333;
-  background-color: #1c2233;
-  color: #fff;
-}
-
-.auth-input:focus {
-  outline: none;
-  border-color: #ff6b6b;
-}
-
-.auth-actions {
-  margin-top: 20px;
-}
-
-.auth-submit {
-  width: 100%;
-  padding: 12px 0;
-  background-color: #ff6b6b;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.auth-submit:hover {
-  background-color: #e45a5a;
-}
-
-.auth-links {
+  padding: 14px;
   text-align: center;
-  margin-top: 15px;
+  border-radius: 999px;
+  background: #1f2937;   /* ダークグレー */
+  color: #ffffff;
+  display: block;
+  box-sizing: border-box;
+  text-decoration: none;  /* ← 下線を消す 超重要 */
+  border: 1px solid #ffffff22;
 }
 
-.auth-link {
-  color: #89a2ff;
+.btn-back:hover {
+  background: #374151;
+}
+/* =============================
+    オレンジボタン（共通デザイン）
+============================= */
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 16px 0;
+  text-align: center;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #f97373, #fb923c);
+  color: #fff;
   text-decoration: none;
+
+  box-shadow: 0 8px 18px rgba(248, 113, 113, 0.4);
+  transition: transform 0.08s ease;
 }
 
-.auth-link:hover {
-  text-decoration: underline;
+.btn-primary:hover {
+  background: linear-gradient(135deg, #fb923c, #f97373);
+  box-shadow: 0 10px 24px rgba(248, 113, 113, 0.6);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
 }

@@ -1,0 +1,39 @@
+<div class="main-content">
+  <div class="container">
+
+    <h1 class="page-title">記録一覧</h1>
+
+    <div class="add-button-area">
+      <%= link_to "＋ 記録を追加", new_training_record_path, class: "btn-primary" %>
+    </div>
+
+    <% @training_records.each do |record| %>
+      <div class="card record-card">
+        <div class="record-header">
+          <span class="record-date"><%= record.training_date.strftime("%Y/%m/%d") %></span>
+          <div class="record-actions">
+            <%= link_to "詳細", training_record_path(record), class: "mini-btn mini-btn-blue" %>
+            <%= link_to "編集", edit_training_record_path(record), class: "mini-btn mini-btn-green" %>
+          </div>
+        </div>
+
+        <div class="record-main">
+          <span class="weight"><%= record.weight %>kg</span>
+          <span class="reps">× <%= record.reps %>回</span>
+          <span class="sets">× <%= record.sets %>セット</span>
+        </div>
+
+        <div class="record-sub">
+          総ボリューム：<%= record.total_volume %>
+        </div>
+
+        <% if record.advice.present? %>
+          <div class="record-advice">
+            メモ：<%= record.advice %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

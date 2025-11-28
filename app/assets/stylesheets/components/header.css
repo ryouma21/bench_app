@@ -1,0 +1,86 @@
+/* ヘッダー */
+.global-header {
+  height: 60px;
+  background-color: #111;
+  border-bottom: 1px solid #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.header-inner {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== ヘッダーの見た目を復活 ===== */
+
+/* ロゴ */
+.header-logo {
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+}
+
+.header-logo:hover {
+  color: #ff6b6b;
+}
+
+.header-user {
+  color: #f1f5f9;  /* かなり見やすい白寄りのグレー */
+  font-size: 15px; /* 少し大きくして強調 */
+  font-weight: 500; /* 太さを追加で読みやすく */
+  margin-right: 10px;
+  margin-left: 5px;
+}
+
+
+/* 右側（ログイン・新規登録） */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+/* ボタン基本 */
+.header-link {
+  padding: 6px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #fff;
+  background: #222;
+  border: 1px solid #444;
+  transition: 0.2s;
+}
+
+/* 新規登録 */
+.header-link--primary {
+  background: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* ログアウト */
+.header-link--danger {
+  background: #dc3545;
+  border-color: #dc3545;
+}
+
+/* ホバー時 */
+.header-link:hover {
+  background: #333;
+}

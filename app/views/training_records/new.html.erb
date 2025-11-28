@@ -1,0 +1,47 @@
+<div class="main-content">
+  <div class="container">
+    <h1 class="page-title">記録を追加する</h1>
+
+    <div class="card form-card">
+
+      <%= form_with model: @training_record, local: true do |f| %>
+
+        <div class="form-group">
+          <%= f.label :training_date, "日付" %>
+          <%= f.date_field :training_date, class: "form-input" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :weight, "重量(kg)" %>
+          <%= f.number_field :weight, class: "form-input" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :reps, "回数" %>
+          <%= f.number_field :reps, class: "form-input" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :sets, "セット数" %>
+          <%= f.number_field :sets, class: "form-input" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :fatigue_level, "疲労度(任意)" %>
+          <%= f.number_field :fatigue_level, class: "form-input" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :advice, "メモ・アドバイス(任意)" %>
+          <%= f.text_field :advice, class: "form-input" %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.submit "保存する", class: "btn-primary" %>
+          <%= link_to "← 一覧に戻る", training_records_path, class: "btn-back" %>
+        </div>
+
+      <% end %>
+     </div>
+  </div>  
+</div>

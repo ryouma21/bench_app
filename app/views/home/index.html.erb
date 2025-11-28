@@ -1,94 +1,38 @@
-<style>
-  body {
-  margin: 0;
-  padding: 0;
-  font-family: system-ui, sans-serif;
-  background: #050814;
-  color: #f4f4f4;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  }
-  .container {
-  flex: 1;
-  padding: 16px;
-  max-width: 480px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  }
-  header {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 0;
-  }
-  .main-card {
-  background: #0f172a;
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-  margin-bottom: 16px;
-  }
-  .menu-main-text {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 8px;
-  }
-  .btn {
-  width: 100%;
-  border-radius: 999px;
-  padding: 12px;
-  font-size: 15px;
-  margin-bottom: 8px;
-  cursor: pointer;
-  }
-  .btn-primary {
-  background: #ef4444;
-  color: white;
-  border: none;
-  }
-  .btn-outline {
-  background: transparent;
-  color: #f97373;
-  border: 1px solid #f97373;
-  }
-/*
-  .footer-nav {
-  border-top: 1px solid #1f2933;
-  background: #020617;
-  padding: 6px 0;
-  display: flex;
-  justify-content: space-around;
-  }
-  .nav-item {
-  font-size: 12px;
-  color: #6b7280;
-  text-align: center;
-  }
-  .nav-item.active { color: #f97373; }
-*/
-</style>
+<main class="main-content">
+  <div class="container home-container">
 
-<div class="container">
-  <header>
-    <div class="app-title">ベンチ先生</div>
-    <button class="menu-button">≡</button>
-  </header>
+    <!-- Today’s Menu タイトル -->
+    <div class="section-title">Today’s Menu</div>
 
-  <section class="main-card">
-    <div>今日のメニュー</div>
-    <div class="menu-main-text" id="menu-main">ベンチプレス 75kg × 5回 × 4セット</div>
-    <div id="menu-sub">休憩：2〜3分 / RPE：8</div>
-    <p id="advice">肩をすくめず、胸を張って押しましょう。</p>
-  </section>
+    <!-- メインメニューカード -->
+    <section class="menu-card">
+      <div id="menu-main" class="menu-main-text">
+        ベンチプレス 75kg × 5回 × 4セット
+      </div>
 
-  <button class="btn btn-primary" id="start-btn">このメニューで開始</button>
-  <button class="btn btn-outline" id="change-btn">別のメニューを見る</button>
-</div>
+      <div id="menu-sub" class="menu-sub-text">
+        休憩：2〜3分 / RPE：8
+      </div>
 
-<!--<div class="footer-nav">
-  <div class="nav-item active">🏠<br/>ホーム</div>
-  <div class="nav-item">📊<br/>記録</div>
-  <div class="nav-item">🧍<br/>フォーム</div>
-</div>
--->
+      <div class="menu-advice-label">今日の意識</div>
+      <div id="advice" class="menu-advice-text">
+        肩をすくめず、胸をしっかり張ることを意識しよう。
+      </div>
+    </section>
+
+    <!-- ボタンエリア -->
+    <div class="button-group">
+      <button id="start-btn" class="btn btn-primary" onclick="location.href='<%= new_training_record_path %>'">
+        このメニューで記録する
+      </button>
+      <button id="change-btn" class="btn btn-secondary">
+        他のメニューを提案してもらう
+      </button>
+    </div>
+
+    <p class="hint-text">
+      迷ったら、このメニューから始めればOKです。
+    </p>
+
+  </div>
+</main>

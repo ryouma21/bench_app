@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  weight: 1
+  reps: 1
+  sets: 1
+  total_volume: 1
+  fatigue_level: 1
+  advice: MyString
+  training_date: 2025-11-27
+
+two:
+  user: two
+  weight: 1
+  reps: 1
+  sets: 1
+  total_volume: 1
+  fatigue_level: 1
+  advice: MyString
+  training_date: 2025-11-27
