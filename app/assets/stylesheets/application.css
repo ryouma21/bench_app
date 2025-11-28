@@ -58,3 +58,22 @@ body {
   margin-bottom: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
+/* =============================
+    戻るボタン（共通デザイン）
+============================= */
+.btn-back {
+  width: 100%;
+  padding: 14px;
+  text-align: center;
+  border-radius: 999px;
+  background: #1f2937;   /* ダークグレー */
+  color: #ffffff;
+  display: block;
+  box-sizing: border-box;
+  text-decoration: none;  /* ← 下線を消す 超重要 */
+  border: 1px solid #ffffff22;
+}
+
+.btn-back:hover {
+  background: #374151;
+}

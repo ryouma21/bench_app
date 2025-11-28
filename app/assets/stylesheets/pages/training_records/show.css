@@ -11,6 +11,12 @@
 }
 
 /* カード内 */
+/* 詳細ページ専用：カードの内側に余白を足す */
+.record-card {
+  padding: 24px;           /* ここを好みで 20〜24px くらいに調整 */
+  box-sizing: border-box;  /* 念のため、はみ出し防止 */
+}
+
 .record-date {
   color: #cbd5e1;
   font-size: 14px;
@@ -39,50 +45,43 @@
   justify-content: center;
 }
 
-/* ===== 編集（青） ===== */
-.btn-edit {
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
+/* ===== 編集（オレンジ） ===== */
+.btn-primary {
+  display: inline-block; 
+  width: 100%;
+  background: linear-gradient(90deg, #ff7a59, #ff9a7a);
+  padding: 14px;
   color: #fff;
-  padding: 10px 28px;
-  border-radius: 999px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 16px;
   font-weight: bold;
-  border: none;
-  display: inline-block;
+  margin-bottom: 12px;
   text-decoration: none;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
-  transition: 0.2s;
+  box-shadow: 0 4px 12px rgba(255, 100, 80, 0.4);
 }
 
-.btn-edit:hover {
-  background: linear-gradient(135deg, #1d4ed8, #2563eb);
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.55);
+.btn-primary:hover {
+  background: linear-gradient(135deg, #ff6b4a, #ff8a64);
+  box-shadow: 0 6px 16px rgba(255, 100, 80, 0.55);
 }
 
 /* ===== 削除（赤） ===== */
-.btn-delete {
-  background: linear-gradient(135deg, #ef4444, #f87171);
+.btn-danger {
+  display: block;
+  width: 100%;
+  background: #ef4444;
+  padding: 14px;
   color: #fff;
-  padding: 10px 28px;
-  border-radius: 999px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 16px;
   font-weight: bold;
+  margin-bottom: 12px;
   text-decoration: none;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
-  transition: 0.2s;
 }
 
-.btn-delete:hover {
+.btn-danger:hover {
   background: linear-gradient(135deg, #dc2626, #ef4444);
   box-shadow: 0 6px 16px rgba(239, 68, 68, 0.55);
-}
-
-/* ===== 戻るボタン ===== */
-.btn-back {
-  background: #475569;
-  color: #fff;
-  padding: 10px 24px;
-  border-radius: 12px;
-  text-decoration: none;
-  display: block;
-  text-align: center;
-  margin-top: 18px;
 }

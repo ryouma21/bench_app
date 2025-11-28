@@ -1,99 +1,45 @@
-<h1 class="page-title">記録を編集</h1>
+<div class="main-content">
+  <div class="container">
 
-<div class="record-card">
+    <h1 class="page-title">記録を編集</h1>
 
-  <%= form_with model: @training_record, local: true do |f| %>
+    <div class="card">
 
-    <div class="form-group">
-      <label>日付</label>
-      <%= f.date_field :training_date, class: "form-input" %>
+      <%= form_with model: @training_record, local: true do |f| %>
+
+        <div class="form-group">
+          <label>日付</label>
+          <%= f.date_field :training_date, class: "form-input" %>
+        </div>
+
+        <div class="form-group">
+          <label>重量(kg)</label>
+          <%= f.number_field :weight, class: "form-input" %>
+        </div>
+
+        <div class="form-group">
+          <label>回数</label>
+          <%= f.number_field :reps, class: "form-input" %>
+        </div>
+
+        <div class="form-group">
+          <label>セット数</label>
+          <%= f.number_field :sets, class: "form-input" %>
+        </div>
+
+        <div class="form-group">
+          <label>メモ</label>
+          <%= f.text_field :advice, class: "form-input" %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.submit "更新する", class: "btn-primary" %>
+          <%= link_to "詳細に戻る", training_record_path(@training_record), class: "btn-back" %>
+        </div>
+
+      <% end %>
+
     </div>
 
-    <div class="form-group">
-      <label>重量(kg)</label>
-      <%= f.number_field :weight, class: "form-input" %>
-    </div>
-
-    <div class="form-group">
-      <label>回数</label>
-      <%= f.number_field :reps, class: "form-input" %>
-    </div>
-
-    <div class="form-group">
-      <label>セット数</label>
-      <%= f.number_field :sets, class: "form-input" %>
-    </div>
-
-    <div class="form-group">
-      <label>メモ</label>
-      <%= f.text_field :advice, class: "form-input" %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "更新する", class: "submit-btn" %>
-      <%= link_to "戻る", training_record_path(@training_record), class: "back-btn" %>
-    </div>
-
-  <% end %>
-
+  </div>
 </div>
-
-
-<style>
-  body {
-    background: #050814;
-  }
-
-  .page-title {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 16px;
-    color: #f4f4f4;
-  }
-
-  .record-card {
-    background: #0f172a;
-    padding: 20px;
-    border-radius: 16px;
-    margin-top: 10px;
-    color: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  }
-
-  .form-group {
-    margin-bottom: 16px;
-  }
-
-  .form-input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    margin-top: 4px;
-    background: #1e293b;
-    color: #fff;
-  }
-
-  .actions {
-    margin-top: 20px;
-    display: flex;
-    gap: 12px;
-  }
-
-  .submit-btn {
-    background: #2563eb;
-    color: #fff;
-    padding: 10px 18px;
-    border-radius: 8px;
-    text-decoration: none;
-    border: none;
-  }
-
-  .back-btn {
-    background: #94a3b8;
-    color: #fff;
-    padding: 10px 18px;
-    border-radius: 8px;
-    text-decoration: none;
-  }
-</style>
