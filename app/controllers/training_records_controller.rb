@@ -2,7 +2,7 @@ class TrainingRecordsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @training_record = TrainingRecord.new
+    @training_record = TrainingRecord.new(training_date: Date.current)
   end
 
   def index

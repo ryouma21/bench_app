@@ -72,9 +72,9 @@
 
 /* ミニボタン共通 */
 .mini-btn {
-  padding: 6px 16px;
+  padding: 8px 18px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   text-decoration: none;
   display: inline-block;
