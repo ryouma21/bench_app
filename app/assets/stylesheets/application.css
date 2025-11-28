@@ -99,7 +99,7 @@ body {
   text-decoration: none;
 
   box-shadow: 0 8px 18px rgba(248, 113, 113, 0.4);
-  transition: transform 0.08s ease,
+  transition: transform 0.08s ease;
 }
 
 .btn-primary:hover {
