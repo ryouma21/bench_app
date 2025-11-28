@@ -10,7 +10,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="<%= user_signed_in? ? '' : 'logged-out' %>">
     <header class="global-header">
       <div class="header-inner">
         <div class="header-left">
