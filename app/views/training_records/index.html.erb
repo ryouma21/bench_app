@@ -12,8 +12,8 @@
         <div class="record-header">
           <span class="record-date"><%= record.training_date.strftime("%Y/%m/%d") %></span>
           <div class="record-actions">
-            <%= link_to "詳細", training_record_path(record), class: "detail-link" %>
-            <%= link_to "編集", edit_training_record_path(record), class: "edit-link" %>
+            <%= link_to "詳細", training_record_path(record), class: "mini-btn mini-btn-blue" %>
+            <%= link_to "編集", edit_training_record_path(record), class: "mini-btn mini-btn-green" %>
           </div>
         </div>
 
