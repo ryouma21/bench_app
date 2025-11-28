@@ -1,127 +1,39 @@
-<h1>記録一覧</h1>
+<div class="main-content">
+  <div class="container">
 
-<div class="add-button-area">
-  <%= link_to "＋ 記録を追加", new_training_record_path, class: "add-button" %>
+    <h1 class="page-title">記録一覧</h1>
+
+    <div class="add-button-area">
+      <%= link_to "＋ 記録を追加", new_training_record_path, class: "add-button" %>
+    </div>
+
+    <% @training_records.each do |record| %>
+      <div class="card record-card">
+        <div class="record-header">
+          <span class="record-date"><%= record.training_date.strftime("%Y/%m/%d") %></span>
+          <div class="record-actions">
+            <%= link_to "詳細", training_record_path(record), class: "detail-link" %>
+            <%= link_to "編集", edit_training_record_path(record), class: "edit-link" %>
+          </div>
+        </div>
+
+        <div class="record-main">
+          <span class="weight"><%= record.weight %>kg</span>
+          <span class="reps">× <%= record.reps %>回</span>
+          <span class="sets">× <%= record.sets %>セット</span>
+        </div>
+
+        <div class="record-sub">
+          総ボリューム：<%= record.total_volume %>
+        </div>
+
+        <% if record.advice.present? %>
+          <div class="record-advice">
+            メモ：<%= record.advice %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
-<% @training_records.each do |record| %>
-  <div class="record-card">
-    <span class="record-date"><%= record.training_date.strftime("%Y/%m/%d") %></span>
-    <div class="record-header">
-      <%= link_to "詳細", training_record_path(record), class: "detail-link" %>
-      <%= link_to "編集", edit_training_record_path(record), class: "edit-link" %>
-    </div>
-
-    <div class="record-body">
-      <div class="record-main">
-        <span class="weight"><%= record.weight %>kg</span>
-        <span class="reps">× <%= record.reps %>回</span>
-        <span class="sets">× <%= record.sets %>セット</span>
-      </div>
-
-      <div class="record-sub">
-        総ボリューム：<%= record.total_volume %>
-      </div>
-
-      <% if record.advice.present? %>
-        <div class="record-advice">
-          メモ：<%= record.advice %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<style>
-  body {
-    background: #050814;
-  }
-
-  .container {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 16px;
-  }
-
-  .page-title {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 16px;
-    color: #f4f4f4;
-  }
-
-  .add-button-area {
-    margin-bottom: 16px;
-  }
-
-  .add-button {
-    display: inline-block;
-    background: #2563eb;
-    color: #fff;
-    padding: 10px 18px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  .record-card {
-    background: #0f172a;
-    padding: 16px;
-    border-radius: 16px;
-    margin-bottom: 20px;
-    color: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  }
-
-  .record-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
-
-  .record-date {
-    color: #cbd5e1;
-  }
-
-  .edit-link {
-    font-size: 12px;
-    color: #38bdf8;
-    text-decoration: none;
-  }
-
-  .record-main {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 6px;
-  }
-
-  .record-sub {
-    font-size: 14px;
-    margin-bottom: 6px;
-    color: #e2e8f0;
-  }
-
-  .record-advice {
-    font-size: 13px;
-    color: #94a3b8;
-    margin-top: 4px;
-  }
-  <style>
-  .record-actions {
-    display: flex;
-    gap: 8px;
-  }
-  .detail-link {
-    font-size: 12px;
-    color: #38bdf8;   /* 青 */
-    text-decoration: none;
-  }
-  .edit-link {
-    font-size: 12px;
-    color: #34d399;   /* 緑 */
-    text-decoration: none;
-  }
-</style>
-
-</style>

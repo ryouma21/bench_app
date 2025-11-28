@@ -1,0 +1,75 @@
+/* =============================
+   Training Records Index Page
+============================= */
+
+.page-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #f4f4f4;
+}
+
+.add-button-area {
+  margin-bottom: 16px;
+}
+
+.add-button {
+  display: inline-block;
+  background: #2563eb;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* カード固有の調整 */
+.record-card {
+  color: #fff;
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.record-date {
+  color: #cbd5e1;
+}
+
+.record-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.detail-link {
+  font-size: 12px;
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.edit-link {
+  font-size: 12px;
+  color: #34d399;
+  text-decoration: none;
+}
+
+.record-main {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.record-sub {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #e2e8f0;
+}
+
+.record-advice {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-top: 4px;
+}

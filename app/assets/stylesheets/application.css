@@ -15,216 +15,46 @@
  */
 
 
-.global-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #111;
-  border-top: 1px solid #333;
-  padding: 6px 0;
-}
-
-.footer-inner {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.footer-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: #fff;
-  font-size: 12px;
-}
-
-.footer-icon {
-  font-size: 18px;
-}
-
-.footer-text {
-  margin-top: 2px;
-}
-
-.footer-item:hover {
-  background-color: #222;
-  border-radius: 8px;
-}
-
-.footer-item:hover .footer-text {
-  color: #ff6b6b;
-}
-
-.footer-item:hover .footer-icon {
-  opacity: 0.7;
+/* =============================
+    Reset & Global
+============================= */
+body {
+  margin: 0;
+  padding: 0;
+  background: #050811;
+  color: #ffffff;
+  font-family: system-ui, sans-serif;
 }
 
 /* =============================
-    Auth Pages (Login / Signup)
+    Layout
 ============================= */
 
-body {
-  background-color: #0a0f1b; /* アプリのホームと同じ色 */
-  color: #fff;
-}
-
-.auth-container {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
-
-.auth-card {
-  background-color: #141926;
-  padding: 30px;
-  border-radius: 12px;
-  width: 420px;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.auth-title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.auth-field {
-  margin-bottom: 15px;
-}
-
-.auth-field label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 14px;
-  color: #cdd4e7;
-}
-
-.auth-input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #333;
-  background-color: #1c2233;
-  color: #fff;
-}
-
-.auth-input:focus {
-  outline: none;
-  border-color: #ff6b6b;
-}
-
-.auth-actions {
-  margin-top: 20px;
-}
-
-.auth-submit {
-  width: 100%;
-  padding: 12px 0;
-  background-color: #ff6b6b;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.auth-submit:hover {
-  background-color: #e45a5a;
-}
-
-.auth-links {
-  text-align: center;
-  margin-top: 15px;
-}
-
-.auth-link {
-  color: #89a2ff;
-  text-decoration: none;
-}
-
-.auth-link:hover {
-  text-decoration: underline;
-}
-/* ===== レイアウト統一（最終版） ===== */
-
-/* ヘッダー */
-.global-header {
-  height: 60px;
-  background-color: #111;
-  border-bottom: 1px solid #333;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-}
-
-.header-inner {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* メインコンテンツ */
+/* メインコンテンツ領域（ヘッダー下） */
 .main-content {
-  max-width: 960px;
+  max-width: 480px; /* ← ここ統一！ */
   margin: 0 auto;
-  padding: 70px 16px 80px;
+  padding: 70px 16px 80px; /* ヘッダーとフッター分の余白 */
   min-height: 100vh;
 }
-/* ===== ヘッダーの見た目を復活 ===== */
 
-/* ロゴ */
-.header-logo {
-  font-size: 22px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #fff;
-}
-
-.header-logo:hover {
-  color: #ff6b6b;
-}
-
-/* 右側（ログイン・新規登録） */
-.header-right {
+/* 共通コンテナ（フォームなどで使用） */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px;
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
-/* ボタン基本 */
-.header-link {
-  padding: 6px 14px;
-  font-size: 14px;
-  border-radius: 6px;
-  text-decoration: none;
-  color: #fff;
-  background: #222;
-  border: 1px solid #444;
-  transition: 0.2s;
-}
-
-/* 新規登録 */
-.header-link--primary {
-  background: #0d6efd;
-  border-color: #0d6efd;
-}
-
-/* ログアウト */
-.header-link--danger {
-  background: #dc3545;
-  border-color: #dc3545;
-}
-
-/* ホバー時 */
-.header-link:hover {
-  background: #333;
+/* =============================
+    Card（共通カードデザイン）
+============================= */
+.card {
+  background: #0f172a;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
