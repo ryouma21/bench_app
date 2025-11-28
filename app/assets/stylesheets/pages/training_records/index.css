@@ -42,6 +42,13 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.6);
 }
 
+.add-button:hover {
+  background: linear-gradient(135deg, #fb923c, #f97373);
+  box-shadow: 0 10px 24px rgba(248, 113, 113, 0.6);
+  transform: translateY(-1px);
+}
+
+
 /* カード固有の調整 */
 .record-card {
   color: #fff;
