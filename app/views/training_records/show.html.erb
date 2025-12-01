@@ -23,6 +23,15 @@
           総ボリューム：<%= @training_record.total_volume %>
         </div>
 
+        <div class="record-one-rm">
+          推定1RM：
+          <% if @training_record.estimated_one_rm.present? %>
+            <%= @training_record.estimated_one_rm %> kg
+          <% else %>
+            -
+          <% end %>
+        </div>
+        
         <% if @training_record.fatigue_level.present? %>
           <div class="record-fatigue">
             疲労度：<%= @training_record.fatigue_level %>
