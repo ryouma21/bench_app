@@ -1,5 +1,5 @@
 <div class="auth-container">
-  <div class="auth-card">
+  <div class="card auth-card">
     <h2 class="auth-title">ログイン</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -23,7 +23,7 @@
       <% end %>
 
       <div class="auth-actions">
-        <%= f.submit "ログインする", class: "auth-submit" %>
+        <%= f.submit "ログインする", class: "btn btn-primary" %>
       </div>
     <% end %>
 
