@@ -9,6 +9,12 @@ class TrainingRecordsController < ApplicationController
 
   def index
     @training_records = current_user.training_records.order(training_date: :desc)
+
+    # 1RMの配列（nilを除外）
+    @one_rm_values = @training_records.map { |r| r.estimated_one_rm }.compact
+
+    # 日付の配列（グラフの横軸）
+    @one_rm_dates = @training_records.map { |r| r.training_date.strftime("%Y/%m/%d") }
   end
 
   def show
