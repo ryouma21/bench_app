@@ -51,12 +51,6 @@ body {
 /* =============================
     Card（共通カードデザイン）
 ============================= */
-/* 詳細ページ専用：カードの内側に余白を足す */
-.record-card {
-  padding: 24px;           /* ここを好みで 20〜24px くらいに調整 */
-  box-sizing: border-box;  /* 念のため、はみ出し防止 */
-  overflow: hidden;   /* ← 影のはみ出し防止 */
-}
 .card {
   background: #0f172a;
   border-radius: 20px;
@@ -85,7 +79,6 @@ body {
   transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.1s ease;
 }
 
-
 /* =============================
       メイン（オレンジ）
       → index.css の add-button を正式採用
@@ -107,7 +100,6 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
 }
 
-
 /* =============================
       サブ（ダークグレー）
 ============================= */
@@ -121,7 +113,6 @@ body {
   background: rgba(30, 41, 59, 0.9);
 }
 
-
 /* =============================
       危険（赤）
 ============================= */
@@ -134,7 +125,6 @@ body {
   background: linear-gradient(135deg, #dc2626, #ef4444);
   box-shadow: 0 6px 16px rgba(239, 68, 68, 0.55);
 }
-
 
 /* =============================
       戻るボタン（既存を採用）
