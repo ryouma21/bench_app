@@ -44,14 +44,3 @@
   width: 100%;
   box-sizing: border-box;
 }
-
-.btn-primary {
-  width: 100%;
-  padding: 14px;
-  text-align: center;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #ff895e, #ff6b6b);
-  color: #ffffff;
-  font-weight: bold;
-  display: block;
-}
