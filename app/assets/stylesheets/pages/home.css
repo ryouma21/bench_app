@@ -62,30 +62,6 @@
   margin-bottom: 24px;
 }
 
-.btn {
-  width: 100%;
-  border: none;
-  border-radius: 999px;
-  padding: 12px 16px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  background: transparent;
-  color: #f9fafb;
-  outline: none;
-  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.1s ease;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #f97373, #fb923c);
-  box-shadow: 0 8px 18px rgba(248, 113, 113, 0.5);
-}
-
-.btn-secondary {
-  border: 1px solid #4b5563;
-  background: rgba(15, 23, 42, 0.8);
-}
-
 .btn:active {
   transform: translateY(1px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
@@ -102,13 +78,15 @@
 ============================= */
 
 .welcome-card {
-  max-width: 450px;
+  width: 100%;
+  max-width: 480px;     /* ← .home-container と合わせた */
   margin: 40px auto 20px;
-  text-align: center;
   padding: 24px;
   background: #0f172a;
   border-radius: 20px;
+  text-align: center;
   box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  box-sizing: border-box;  /* ← paddingのせいで横ずれしないように */
 }
 
 .welcome-title {
@@ -183,17 +161,6 @@
   margin: 0 auto;
   padding: 20px 16px;
   text-align: center;
-}
-
-/* ウェルカムカードの中央寄せ */
-.welcome-card {
-  background: #0f172a;
-  border-radius: 20px;
-  padding: 24px;
-  margin: 0 auto 32px;
-  width: 100%;
-  max-width: 380px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
 
 /* サンプルカードグループ */

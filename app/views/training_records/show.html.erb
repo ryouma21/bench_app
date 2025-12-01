@@ -38,10 +38,10 @@
       </div>
 
       <div class="record-actions">
-        <%= link_to "編集", edit_training_record_path(@training_record), class: "btn-primary" %>
+        <%= link_to "編集", edit_training_record_path(@training_record), class: "btn btn-primary" %>
         <%= link_to "削除", training_record_path(@training_record),
           data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
-          class: "btn-danger"
+          class: "btn btn-danger"
         %>
       </div>
 

@@ -11,12 +11,6 @@
 }
 
 /* カード内 */
-/* 詳細ページ専用：カードの内側に余白を足す */
-.record-card {
-  padding: 24px;           /* ここを好みで 20〜24px くらいに調整 */
-  box-sizing: border-box;  /* 念のため、はみ出し防止 */
-}
-
 .record-date {
   color: #cbd5e1;
   font-size: 14px;
@@ -36,6 +30,11 @@
   color: #e2e8f0;
 }
 
+.back-area {
+  margin-top: 20px;  /* 十分に間隔をあける */
+}
+
+
 /* 編集・削除ボタン */
 /* ===== ボタンの横並び ===== */
 .record-actions {
@@ -44,44 +43,10 @@
   gap: 16px;
   justify-content: center;
 }
-
-/* ===== 編集（オレンジ） ===== */
-.btn-primary {
-  display: inline-block; 
-  width: 100%;
-  background: linear-gradient(90deg, #ff7a59, #ff9a7a);
-  padding: 14px;
-  color: #fff;
-  border-radius: 12px;
+/* 詳細ページのボタンは横並び用に width:auto に変更 */
+.record-actions > .btn {
+  width: auto;
+  width: 140px;     /* ← 固定幅で見やすいサイズに */
+  padding: 14px 0;  /* ← 全ページのボタンと同じ高さ */
   text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 12px;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(255, 100, 80, 0.4);
-}
-
-.btn-primary:hover {
-  background: linear-gradient(135deg, #ff6b4a, #ff8a64);
-  box-shadow: 0 6px 16px rgba(255, 100, 80, 0.55);
-}
-
-/* ===== 削除（赤） ===== */
-.btn-danger {
-  display: block;
-  width: 100%;
-  background: #ef4444;
-  padding: 14px;
-  color: #fff;
-  border-radius: 12px;
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 12px;
-  text-decoration: none;
-}
-
-.btn-danger:hover {
-  background: linear-gradient(135deg, #dc2626, #ef4444);
-  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.55);
 }
