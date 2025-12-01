@@ -154,18 +154,20 @@
 
 /* サンプルカードグループ */
 .sample-card {
-  margin: 0 auto;
-  max-width: 380px;
-  text-align: center;
+  max-width: 480px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 /* 中のサンプルメニューカード */
 .menu-sample {
-  margin: 16px auto 0;
-  padding: 16px;
-  max-width: 360px;
-}
-/* ログアウト時のレイアウト調整 */
-body.logged-out .main-content {
-  padding-top: 40px;   /* 70px -> 40px とかに調整 */
+  max-width: 100%;
+  max-width: 100%;
+  padding: 20px;
+  background: #0f172a;      /* .card と合わせるなら */
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  box-sizing: border-box;
 }
