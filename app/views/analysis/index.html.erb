@@ -1,2 +1,36 @@
-<h1>Analysis#index</h1>
-<p>Find me in app/views/analysis/index.html.erb</p>
+<div class="analysis-container">
+  <h1>データ分析</h1>
+
+  <h2>週間総ボリューム</h2>
+  <p><%= @weekly_volume %> kg</p>
+
+  <h2>推定1RMの推移</h2>
+  <canvas id="oneRmChart" width="400" height="200"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+document.addEventListener("turbo:load", function() {
+  const oneRmValues = <%= raw @one_rm_values.to_json %>;
+  const oneRmDates  = <%= raw @one_rm_dates.to_json %>;
+
+  const ctx = document.getElementById('oneRmChart');
+  if (!ctx) return;
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: oneRmDates,
+      datasets: [{
+        label: '推定1RM',
+        data: oneRmValues,
+        borderColor: 'rgba(255, 159, 64, 1)',
+        borderWidth: 2,
+        tension: 0.3,
+        fill: false
+      }]
+    }
+  });
+});
+</script>
