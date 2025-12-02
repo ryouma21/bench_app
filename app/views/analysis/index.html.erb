@@ -18,32 +18,12 @@
   <p><%= @weekly_volume %> kg</p>
 
   <h2>推定1RMの推移</h2>
+  <div id="chart-data" 
+    data-values="<%= @one_rm_values.to_json %>"
+    data-dates="<%= @one_rm_dates.to_json %>">
+  </div>
+
   <canvas id="oneRmChart" width="400" height="200"></canvas>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-document.addEventListener("turbo:load", function() {
-  const oneRmValues = <%= raw @one_rm_values.to_json %>;
-  const oneRmDates  = <%= raw @one_rm_dates.to_json %>;
-
-  const ctx = document.getElementById('oneRmChart');
-  if (!ctx) return;
-
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: oneRmDates,
-      datasets: [{
-        label: '推定1RM',
-        data: oneRmValues,
-        borderColor: 'rgba(255, 159, 64, 1)',
-        borderWidth: 2,
-        tension: 0.3,
-        fill: false
-      }]
-    }
-  });
-});
-</script>
+<%= javascript_import_module_tag "analysis" %>
