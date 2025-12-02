@@ -70,4 +70,15 @@ class User < ApplicationRecord
       weight: weight
     }
   end
+
+  def average_last_three_1rm
+    # 記録が3つ未満なら平均が出せないので nil
+    return nil if training_records.size < 3
+
+    # 最新3回の1RMだけ取り出す
+    last_three = training_records.last(3).map(&:estimated_one_rm)
+
+    # 平均を返す（小数第1位で丸める）
+    (last_three.sum / 3.0).round(1)
+  end
 end
