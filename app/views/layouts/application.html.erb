@@ -49,10 +49,10 @@
             <div class="footer-icon">📝</div>
             <div class="footer-text">フォーム</div>
           <% end %>
-          <a href="/analysis" class="footer-item">
+          <%= link_to analysis_path, class: "footer-item", data: { turbo: false } do %>
             <span class="footer-icon">📊</span>
             <span class="footer-text">分析</span>
-          </a>
+          <% end %>
           <% else %>
           <%= link_to new_user_session_path, class: "footer-item" do %>
             <div class="footer-icon">🔐</div>
