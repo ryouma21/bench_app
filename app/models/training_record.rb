@@ -17,6 +17,12 @@ class TrainingRecord < ApplicationRecord
     one_rm.round(1)
   end
 
+  def self.weekly_volume(user)
+    # 過去7日間の total_volume の合計を返す
+    where(user: user, training_date: 7.days.ago.to_date..Date.today)
+    .sum(:total_volume)
+  end
+
   private
 
   def set_total_volume
