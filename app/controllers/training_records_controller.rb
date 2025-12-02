@@ -15,6 +15,8 @@ class TrainingRecordsController < ApplicationController
 
     # 日付の配列（グラフの横軸）
     @one_rm_dates = @training_records.map { |r| r.training_date.strftime("%Y/%m/%d") }
+
+    @weekly_volume = TrainingRecord.weekly_volume(current_user)
   end
 
   def show
