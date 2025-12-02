@@ -24,8 +24,8 @@ class User < ApplicationRecord
       }
     end
 
-    # 前回の推定1RM
-    previous_1rm = training_records[-2].estimated_one_rm
+    # 平均の1RM（過去3回）
+    average_1rm = average_last_three_1rm
 
     # 過去7日間のボリューム
     weekly_volume = TrainingRecord.weekly_volume(self)
@@ -35,13 +35,13 @@ class User < ApplicationRecord
     # -------------------------
 
     # ① 1RMが伸びている → 重め
-    if latest_1rm > previous_1rm
+    if latest_1rm > average_1rm
       percentage = 80
       reps = 3
       sets = 3
 
     # ② 1RMが落ちている → 軽め
-    elsif latest_1rm < previous_1rm
+    elsif latest_1rm < average_1rm
       percentage = 70
       reps = 5
       sets = 5
