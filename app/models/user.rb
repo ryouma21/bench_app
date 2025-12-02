@@ -8,21 +8,66 @@ class User < ApplicationRecord
   has_many :training_records
 
   def suggested_menu
-    # ① 記録が1つもない場合はメニューを作れない
+    # 記録が1つもない場合はメニューを作れない
     return nil if training_records.empty?
 
-    # ② 最新の推定1RMを取得（最後の記録が最新）
+    # 最新の推定1RMを取得（最後の記録が最新）
     latest_1rm = training_records.last.estimated_one_rm
 
-    # ③ 最新1RMの70%を計算（今日の提案重量）
-    suggested_weight = (latest_1rm * 0.7).round
+     # 1つ前の記録がなければ（＝今回が初回）提案メニューをハッシュで返す
+    if training_records.count == 1
+      return {
+        percentage: 70,
+        reps: 5,
+        sets: 5,
+        weight: (latest_1rm * 0.7).round
+      }
+    end
 
-    # ④ 提案メニューをハッシュで返す
+    # 前回の推定1RM
+    previous_1rm = training_records[-2].estimated_one_rm
+
+    # 過去7日間のボリューム
+    weekly_volume = TrainingRecord.weekly_volume(self)
+
+    # -------------------------
+    # 条件分岐（基礎バージョン）
+    # -------------------------
+
+    # ① 1RMが伸びている → 重め
+    if latest_1rm > previous_1rm
+      percentage = 80
+      reps = 3
+      sets = 3
+
+    # ② 1RMが落ちている → 軽め
+    elsif latest_1rm < previous_1rm
+      percentage = 70
+      reps = 5
+      sets = 5
+
+    else
+      # 1RM横ばいのとき
+      if weekly_volume < 3000
+        percentage = 75
+        reps = 5
+        sets = 5
+      else
+        percentage = 65
+        reps = 6
+        sets = 3
+      end
+    end
+
+    # 最終的に重量を計算
+    weight = (latest_1rm * (percentage / 100.0)).round
+
+    # 結果を返す
     {
-      percentage: 70,
-      reps: 5,
-      sets: 5,
-      weight: suggested_weight
+      percentage: percentage,
+      reps: reps,
+      sets: sets,
+      weight: weight
     }
   end
 end
