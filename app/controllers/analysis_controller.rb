@@ -11,5 +11,8 @@ class AnalysisController < ApplicationController
 
     # ④ 週間総ボリューム
     @weekly_volume = TrainingRecord.weekly_volume(current_user)
+
+    # ★ 今日のおすすめメニューを計算
+    @today_menu = current_user.suggested_menu
   end
 end
