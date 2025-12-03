@@ -31,6 +31,29 @@ class User < ApplicationRecord
     # 週間ボリューム
     weekly_volume = TrainingRecord.weekly_volume(self)
 
+    ########################################
+    # ★ ここから新ロジック(A+D)の追加部分
+    ########################################
+
+    # ① diff（差分：最新1RM - 過去3回平均）
+    diff = latest_1rm - average_1rm
+
+    # ② 誤差の範囲（普通のジムの最小プレート：2.5kg）
+    threshold = 2.5
+
+    # ③ トレンド判定（UP / DOWN / FLAT）
+    trend =
+      if diff >= threshold
+        :up        # 調子いい
+      elsif diff <= -threshold
+        :down      # 調子悪い
+      else
+        :flat      # 誤差の範囲
+      end
+
+    ########################################
+    # ★ ここまでが新ロジックの追加部分
+    ########################################
     # 条件分岐
     if latest_1rm > average_1rm
       percentage = 80
