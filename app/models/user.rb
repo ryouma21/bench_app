@@ -55,17 +55,21 @@ class User < ApplicationRecord
     # ★ ここまでが新ロジックの追加部分
     ########################################
     # 条件分岐
-    if latest_1rm > average_1rm
+    case trend
+    when :up
+      # 調子良い → 攻めメニュー
       percentage = 80
       reps = 3
       sets = 3
 
-    elsif latest_1rm < average_1rm
+    when :down
+      # 調子悪い → 回復より・フォーム重視
       percentage = 70
       reps = 5
       sets = 5
 
-    else
+    when :flat
+      # 横ばい → ボリュームで判断
       if weekly_volume < 3000
         percentage = 75
         reps = 5
