@@ -97,4 +97,8 @@ class User < ApplicationRecord
     last_three = records.last(3).map(&:estimated_one_rm)
     (last_three.sum / 3.0).round(1)
   end
+  # 2.5kg刻みに丸める
+  def round_to_plate(weight)
+    (weight / 2.5).round * 2.5
+  end
 end
