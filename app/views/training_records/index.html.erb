@@ -27,6 +27,15 @@
           総ボリューム：<%= record.total_volume %>
         </div>
 
+        <div class="record-one-rm">
+          推定1RM：
+        <% if record.estimated_one_rm.present? %>
+          <%= record.estimated_one_rm %> kg
+        <% else %>
+            -
+          <% end %>
+        </div>
+
         <% if record.advice.present? %>
           <div class="record-advice">
             メモ：<%= record.advice %>
@@ -36,4 +45,3 @@
     <% end %>
   </div>
 </div>
-
