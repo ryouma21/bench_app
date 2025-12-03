@@ -8,15 +8,18 @@ class User < ApplicationRecord
   has_many :training_records
 
   def suggested_menu
-    # 必ず training_date で並べ替える
-    records = training_records.order(training_date: :asc)
-    return nil if records.empty?
+    # 1RM が入っている記録だけを対象にする（nilが混ざらない）
+    valid_records = training_records
+                  .select { |r| r.estimated_one_rm.present? }
+                  .sort_by(&:training_date)
+    # 記録がなければメニューは作れない
+    return nil if valid_records.empty?
 
     # 最新の1RM（最後のレコードが最新）
-    latest_1rm = records.last.estimated_one_rm
+    latest_1rm = valid_records.last.estimated_one_rm
 
-    # 記録が1つしかない場合は固定メニュー
-    if records.count == 1
+    # 有効データが1件 → 差分が取れないので初回メニュー
+    if valid_records.size == 1
       return {
         percentage: 70,
         reps: 5,
@@ -24,18 +27,31 @@ class User < ApplicationRecord
         weight: (latest_1rm * 0.7).round
       }
     end
+    
+    # 「直近3件」をまず取得（nil含む）
+    recent_three = training_records
+                    .sort_by(&:training_date)
+                    .last(3)
+    
+    # その中で1RMが計算できるものだけ使う
+    valid_recent_three = recent_three
+                        .map(&:estimated_one_rm)
+                        .compact
+    
+    # 比較できるデータが2件未満 → トレンド判定できない# 初回メニュー扱い（安全）
+    if valid_recent_three.size < 2
+      return {
+        percentage: 70,
+        reps: 5,
+        sets: 5,
+        weight: round_to_plate(latest_1rm * 0.7)
+      }
+    end
 
     # 過去3回の平均1RM
-    average_1rm = average_last_three_1rm
-
-    # 週間ボリューム
-    weekly_volume = TrainingRecord.weekly_volume(self)
-
-    ########################################
-    # ★ ここから新ロジック(A+D)の追加部分
-    ########################################
-
-    # ① diff（差分：最新1RM - 過去3回平均）
+    average_1rm = (valid_recent_three.sum / valid_recent_three.size.to_f).round(1)
+    
+    # ① diff（差分：最新1RM - 平均）
     diff = latest_1rm - average_1rm
 
     # ② 誤差の範囲（普通のジムの最小プレート：2.5kg）
@@ -51,10 +67,10 @@ class User < ApplicationRecord
         :flat      # 誤差の範囲
       end
 
-    ########################################
-    # ★ ここまでが新ロジックの追加部分
-    ########################################
-    # 条件分岐
+    # 週間ボリューム（nil安全）
+    weekly_volume = TrainingRecord.weekly_volume(self) || 0
+
+    # 条件分岐 メニューを決定
     case trend
     when :up
       # 調子良い → 攻めメニュー
@@ -80,7 +96,7 @@ class User < ApplicationRecord
         sets = 3
       end
     end
-
+    # ⑩ 最終的な重量を返す（2.5kg刻みに丸める）
     {
       percentage: percentage,
       reps: reps,
@@ -89,14 +105,6 @@ class User < ApplicationRecord
     }
   end
 
-  # ★ 過去3回の平均1RM（必ず training_date で並べ替える）
-  def average_last_three_1rm
-    records = training_records.order(training_date: :asc)
-    return nil if records.size < 3
-
-    last_three = records.last(3).map(&:estimated_one_rm)
-    (last_three.sum / 3.0).round(1)
-  end
   # 2.5kg刻みに丸める
   def round_to_plate(weight)
     (weight / 2.5).round * 2.5
