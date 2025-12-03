@@ -85,7 +85,7 @@ class User < ApplicationRecord
       percentage: percentage,
       reps: reps,
       sets: sets,
-      weight: (latest_1rm * (percentage / 100.0)).round
+      weight: round_to_plate(latest_1rm * (percentage / 100.0))
     }
   end
 
