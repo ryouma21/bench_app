@@ -1,34 +1,47 @@
 document.addEventListener("turbo:load", () => {
 
-  // ホーム画面にしか無い要素を取得
-  const changeBtn = document.getElementById("change-btn");
-  const menuMain  = document.getElementById("menu-main");
-  const menuSub   = document.getElementById("menu-sub");
-  const adviceEl  = document.getElementById("advice");
+  // ① 必要な要素を取ってくる
+  const changeBtn       = document.getElementById("change-btn");
+  const altMenuBtnArea  = document.getElementById("alt-menu-buttons");
+  const lighterBtn      = document.getElementById("lighter-btn");
+  const heavierBtn      = document.getElementById("heavier-btn");
+  const menuMain        = document.getElementById("menu-main");
+  const recordBtn = document.getElementById("record-btn");
 
-  // ホーム画面に必要な要素が全部揃っているか？
-  if (!changeBtn || !menuMain || !menuSub || !adviceEl) {
+  // もしホーム画面じゃなかったら何もしない安全策
+  if (!changeBtn || !altMenuBtnArea  || !menuMain)
     return; // ← JS を止める（他のページでは何もしない）
-  }
 
-  // メニューのデータ
-  const menus = [
-    {main: "ベンチプレス 75kg × 5回 × 4セット", sub: "休憩：2〜3分 / RPE：8", adv: "肩をすくめず胸を張る意識。"},
-    {main: "ベンチプレス 70kg × 8回 × 3セット", sub: "フォーム重視", adv: "ゆっくり下ろして丁寧に上げる。"},
-    {main: "ベンチプレス 80kg × 3回 × 5セット", sub: "重めの日", adv: "足で床を強く踏んで安定させる。"}
-  ];
+  // 「他のメニューを提案」を押したら2つのボタンを表示するだけ
+  changeBtn.addEventListener("click", () => {
+    changeBtn.style.display = "none";       // 元のボタンは隠す
+    altMenuBtnArea.style.display = "block"; // 軽め/重めボタンを見せる
+  });
 
-  let idx = 0;
+  // 「フォーム重視でやる」押したとき → 軽めメニューをRailsからfetch
+  lighterBtn.addEventListener("click", () => {
+    fetch("/menus/lighter")
+      .then(res => res.json())
+      .then(data => {
+        menuMain.textContent =
+          `ベンチプレス ${data.weight}kg × ${data.reps}回 × ${data.sets}セット`;
 
-  // メニュー切替関数
-  function changeMenu() {
-    idx = (idx + 1) % menus.length;
-    menuMain.textContent = menus[idx].main;
-    menuSub.textContent  = menus[idx].sub;
-    adviceEl.textContent = menus[idx].adv;
-  }
+        // 記録ボタンのURLを更新
+        recordBtn.href =
+          `/training_records/new?weight=${data.weight}&reps=${data.reps}&sets=${data.sets}`;
+      });
+  });
 
-  // 別メニューを見るボタン
-  changeBtn.addEventListener("click", changeMenu);
-
+  // 「刺激を入れてみる」押したとき → 重めメニューをRailsからfetch
+  heavierBtn.addEventListener("click", () => {
+    fetch("/menus/heavier")
+      .then(res => res.json())
+      .then(data => {
+        menuMain.textContent =
+          `ベンチプレス ${data.weight}kg × ${data.reps}回 × ${data.sets}セット`;
+        
+        recordBtn.href =
+        `/training_records/new?weight=${data.weight}&reps=${data.reps}&sets=${data.sets}`;
+      });
+  });
 });

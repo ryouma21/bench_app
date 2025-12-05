@@ -109,4 +109,32 @@ class User < ApplicationRecord
   def round_to_plate(weight)
     (weight / 2.5).round * 2.5
   end
+
+  # 軽め（フォーム重視でやる）
+  def suggested_lighter_menu
+    base = suggested_menu
+    return unless base
+
+    lighter_weight = round_to_plate(base[:weight] * 0.9) # 10%軽く,2.5kg刻みに丸める
+
+    {
+      weight: lighter_weight,  
+      reps:   base[:reps] + 1,              # 回数を1増やす
+      sets:   base[:sets]                   # セット数は同じ
+    }
+  end
+
+  # 重め（刺激を入れてみる）ロジック
+  def suggested_heavier_menu
+    base = suggested_menu
+    return unless base
+
+    heavier_weight = round_to_plate(base[:weight] * 1.05)# 5%重く2.5kg刻みに丸める
+
+    {
+      weight:  heavier_weight,
+      reps:   [base[:reps] - 1, 1].max,     # 回数を1減らす（最低1回）
+      sets:   base[:sets]
+    }
+  end
 end

@@ -29,12 +29,24 @@
       <!-- ボタンエリア -->
       <div class="button-group">
       <% if @today_menu.present? %>
-        <%= link_to new_training_record_path(weight: @today_menu[:weight], reps: @today_menu[:reps], sets: @today_menu[:sets]), class: "btn btn-primary" do %>
+        <%= link_to new_training_record_path(weight: @today_menu[:weight], reps:   @today_menu[:reps], sets:   @today_menu[:sets]
+        ), id: "record-btn", class: "btn btn-primary" do %>
         このメニューで記録する<% end %>
       <% end %>
         <button id="change-btn" class="btn btn-secondary">
           他のメニューを提案してもらう
         </button>
+
+         <!-- ▼ 新しい2つのボタン（最初は非表示） -->
+        <div id="alt-menu-buttons" class="alt-menu-buttons">
+          <button id="lighter-btn" class="btn btn-secondary">
+            フォーム重視でやる
+          </button>
+
+          <button id="heavier-btn" class="btn btn-secondary">
+            刺激を入れてみる
+          </button>
+        </div>
       </div>
 
       <p class="hint-text">
