@@ -7,7 +7,13 @@
       <!-- メインメニューカード -->
       <section class="card menu-card">
         <div id="menu-main" class="menu-main-text">
-          ベンチプレス 75kg × 5回 × 4セット
+          <% if @today_menu.present? %>
+            ベンチプレス <%= @today_menu[:weight] %>kg ×
+            <%= @today_menu[:reps] %>回 ×
+            <%= @today_menu[:sets] %>セット
+          <% else %>
+            メニューを作成できません
+          <% end %>
         </div>
 
         <div id="menu-sub" class="menu-sub-text">
@@ -22,7 +28,10 @@
 
       <!-- ボタンエリア -->
       <div class="button-group">
-        <%= button_to "このメニューで記録する", new_training_record_path, method: :get, class: "btn btn-primary" ,form_class: "no-border" %>
+      <% if @today_menu.present? %>
+        <%= link_to new_training_record_path(weight: @today_menu[:weight], reps: @today_menu[:reps], sets: @today_menu[:sets]), class: "btn btn-primary" do %>
+        このメニューで記録する<% end %>
+      <% end %>
         <button id="change-btn" class="btn btn-secondary">
           他のメニューを提案してもらう
         </button>
