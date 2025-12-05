@@ -6,6 +6,7 @@ document.addEventListener("turbo:load", () => {
   const lighterBtn      = document.getElementById("lighter-btn");
   const heavierBtn      = document.getElementById("heavier-btn");
   const menuMain        = document.getElementById("menu-main");
+  const recordBtn = document.getElementById("record-btn");
 
   // もしホーム画面じゃなかったら何もしない安全策
   if (!changeBtn || !altMenuBtnArea  || !menuMain)
@@ -24,6 +25,10 @@ document.addEventListener("turbo:load", () => {
       .then(data => {
         menuMain.textContent =
           `ベンチプレス ${data.weight}kg × ${data.reps}回 × ${data.sets}セット`;
+
+        // 記録ボタンのURLを更新
+        recordBtn.href =
+          `/training_records/new?weight=${data.weight}&reps=${data.reps}&sets=${data.sets}`;
       });
   });
 
@@ -34,6 +39,9 @@ document.addEventListener("turbo:load", () => {
       .then(data => {
         menuMain.textContent =
           `ベンチプレス ${data.weight}kg × ${data.reps}回 × ${data.sets}セット`;
+        
+        recordBtn.href =
+        `/training_records/new?weight=${data.weight}&reps=${data.reps}&sets=${data.sets}`;
       });
   });
 });
