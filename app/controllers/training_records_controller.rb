@@ -4,7 +4,12 @@ class TrainingRecordsController < ApplicationController
   before_action :correct_user, only: [:show,:edit, :update, :destroy]
 
   def new
-    @training_record = TrainingRecord.new(training_date: Date.current)
+    @training_record = TrainingRecord.new(
+      training_date: Date.current,
+      weight: params[:weight],
+      reps:   params[:reps],
+      sets:   params[:sets]
+    )
   end
 
   def index
