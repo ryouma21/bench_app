@@ -23,6 +23,15 @@ class TrainingRecord < ApplicationRecord
     .sum(:total_volume)
   end
 
+  # 1日につき、最新の1件だけ抽出するスコープ
+  scope :latest_per_day, -> {
+   where("(training_date, created_at) IN (
+    SELECT training_date, MAX(created_at)
+    FROM training_records
+    GROUP BY training_date
+  )")
+}
+
   private
 
   def set_total_volume

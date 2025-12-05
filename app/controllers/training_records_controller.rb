@@ -8,7 +8,7 @@ class TrainingRecordsController < ApplicationController
   end
 
   def index
-    @training_records = current_user.training_records.order(training_date: :desc)
+    @training_records = current_user.training_records.order(training_date: :desc, created_at: :desc)
 
     # 1RMの配列（nilを除外）
     @one_rm_values = @training_records.map { |r| r.estimated_one_rm }.compact
