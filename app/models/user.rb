@@ -115,8 +115,10 @@ class User < ApplicationRecord
     base = suggested_menu
     return unless base
 
+    lighter_weight = round_to_plate(base[:weight] * 0.9) # 10%軽く,2.5kg刻みに丸める
+
     {
-      weight: (base[:weight] * 0.9).round,  # 10%軽く
+      weight: lighter_weight,  
       reps:   base[:reps] + 1,              # 回数を1増やす
       sets:   base[:sets]                   # セット数は同じ
     }
@@ -127,12 +129,12 @@ class User < ApplicationRecord
     base = suggested_menu
     return unless base
 
+    heavier_weight = round_to_plate(base[:weight] * 1.05)# 5%重く2.5kg刻みに丸める
+
     {
-      weight: (base[:weight] * 1.05).round, # 5%重く
+      weight:  heavier_weight,
       reps:   [base[:reps] - 1, 1].max,     # 回数を1減らす（最低1回）
       sets:   base[:sets]
     }
   end
-
-
 end
