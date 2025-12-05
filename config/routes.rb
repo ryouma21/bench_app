@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   root "home#index"
   resources :training_records
   get 'analysis', to: 'analysis#index'
+  get "menus/lighter", to: "menus#lighter"
+  get "menus/heavier", to: "menus#heavier"
+
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
