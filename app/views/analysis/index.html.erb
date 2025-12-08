@@ -1,29 +1,31 @@
 <turbo-cache-control value="no-cache"></turbo-cache-control>
-<div class="analysis-container">
-  <h1>データ分析</h1>
+<div class="main-content">
+  <div class="analysis-container">
+    <h1>データ分析</h1>
 
-  <h2>今日のおすすめメニュー</h2>
+    <h2>今日のおすすめメニュー</h2>
 
-  <% if @today_menu.present? %>
-    <p>
-      目安：<%= @today_menu[:percentage] %>%  
-      ／ 重量：<%= @today_menu[:weight] %>kg  
-      ／ <%= @today_menu[:reps] %>回 × <%= @today_menu[:sets] %>セット
-    </p>
-  <% else %>
-    <p>まだ記録がないため計算できません。</p>
-  <% end %>
+    <% if @today_menu.present? %>
+      <p>
+        目安：<%= @today_menu[:percentage] %>%  
+        ／ 重量：<%= @today_menu[:weight] %>kg  
+        ／ <%= @today_menu[:reps] %>回 × <%= @today_menu[:sets] %>セット
+      </p>
+    <% else %>
+      <p>まだ記録がないため計算できません。</p>
+    <% end %>
 
-  <h2>週間総ボリューム</h2>
-  <p><%= @weekly_volume %> kg</p>
+    <h2>週間総ボリューム</h2>
+    <p><%= @weekly_volume %> kg</p>
 
-  <h2>推定1RMの推移</h2>
-  <div id="chart-data" 
-    data-values="<%= @one_rm_values.to_json %>"
-    data-dates="<%= @one_rm_dates.to_json %>">
-  </div>
-
-  <canvas id="oneRmChart" width="400" height="200"></canvas>
+    <h2>推定1RMの推移</h2>
+    <div id="chart-data" 
+      data-values="<%= @one_rm_values.to_json %>"
+      data-dates="<%= @one_rm_dates.to_json %>">
+    </div>
+<canvas id="oneRmChart" width="400" height="200"></canvas>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <%= javascript_import_module_tag "analysis" %>
+  </div>
+</div>

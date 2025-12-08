@@ -1,6 +1,6 @@
 /* ヘッダー */
 .global-header {
-  height: 60px;
+  min-height: 60px;
   background-color: #111;
   border-bottom: 1px solid #333;
   position: fixed;
@@ -16,8 +16,10 @@
   margin: 0 auto;
   padding: 0 16px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  row-gap: 6px;
 }
 
 /* ===== ヘッダーの見た目を復活 ===== */
