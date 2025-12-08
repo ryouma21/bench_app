@@ -2,10 +2,9 @@ class AnalysisController < ApplicationController
   def index
     # ① 過去の記録
     records = current_user.training_records
-    .latest_per_day
-                                    .order(training_date: :desc, created_at: :desc)
-                                    .limit(5)
-                                    .reverse
+              .latest_valid_per_day
+              .order(training_date: :desc)
+              .last(5)
 
     # ② 1RM配列
     @one_rm_values = records.map { |r| r.estimated_one_rm }.compact
