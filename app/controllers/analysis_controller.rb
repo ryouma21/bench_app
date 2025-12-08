@@ -4,7 +4,8 @@ class AnalysisController < ApplicationController
     records = current_user.training_records
               .latest_valid_per_day
               .order(training_date: :desc)
-              .last(5)
+              .limit(5)
+              .reverse  
 
     # ② 1RM配列
     @one_rm_values = records.map { |r| r.estimated_one_rm }.compact
