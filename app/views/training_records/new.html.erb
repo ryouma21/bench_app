@@ -2,6 +2,8 @@
   <div class="container">
     <h1 class="page-title">記録を追加する</h1>
 
+    <%= render "shared/error_messages", object: @training_record %>
+
     <div class="card form-card">
 
       <%= form_with model: @training_record, local: true do |f| %>
