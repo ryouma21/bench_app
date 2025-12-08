@@ -23,13 +23,18 @@ class TrainingRecord < ApplicationRecord
     .sum(:total_volume)
   end
 
-  # 1日につき、最新の1件だけ抽出するスコープ
-  scope :latest_per_day, -> {
-   where("(training_date, created_at) IN (
-    SELECT training_date, MAX(created_at)
-    FROM training_records
-    GROUP BY training_date
-  )")
+  # 1日につき、「weight と reps が揃っているセット」の中で
+  # 最新の1件だけを抽出するスコープ
+  scope :latest_valid_per_day, -> {
+   select("training_records.*")
+    .joins("INNER JOIN (
+            SELECT training_date, MAX(created_at) AS max_created_at
+            FROM training_records
+            WHERE weight IS NOT NULL AND reps IS NOT NULL
+            GROUP BY training_date
+          ) AS daily
+          ON training_records.training_date = daily.training_date
+          AND training_records.created_at = daily.max_created_at")
 }
 
   private
