@@ -164,4 +164,9 @@ body {
     padding-top: 50px;     /* 通常70px → 小さい画面では詰まって見えるため減らす */
     padding-bottom: 70px;  /* フッターに重ならない程度に余白確保 */
   }
+
+    .header-user {
+    max-width: 90px;     /* iPhone SE 最適化 */
+    font-size: 13px;
+  }
 }
