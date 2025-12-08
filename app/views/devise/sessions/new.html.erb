@@ -2,6 +2,11 @@
   <div class="auth-container">
     <div class="card auth-card">
       <h2 class="auth-title">ログイン</h2>
+      <% if flash[:alert].present? %>
+        <div class="auth-error-message">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
