@@ -145,6 +145,14 @@ body {
 .btn-back:hover {
   background: #374151;
 }
+
+/* ヘッダー内だけボタン幅を自動にする */
+.global-header .btn {
+  width: auto;
+  padding: 8px 14px;   /* 高さを少し控えめにする */
+  font-size: 14px;     /* ヘッダーとして自然なサイズに */
+}
+
 /* ===========================================
    画面が「幅380px以下のときだけ」適用されるCSS
    → iPhone SEなど縦が短い端末向けのレイアウト調整
@@ -155,5 +163,10 @@ body {
   .main-content {
     padding-top: 50px;     /* 通常70px → 小さい画面では詰まって見えるため減らす */
     padding-bottom: 70px;  /* フッターに重ならない程度に余白確保 */
+  }
+
+    .header-user {
+    max-width: 90px;     /* iPhone SE 最適化 */
+    font-size: 13px;
   }
 }
