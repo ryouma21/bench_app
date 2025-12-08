@@ -1,0 +1,26 @@
+.form-error-message {
+  background: rgba(255, 80, 80, 0.12);
+  border: 1px solid rgba(255, 80, 80, 0.3);
+  color: #ff8c8c;
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.form-error-title {
+  margin: 0 0 8px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #ff8c8c;
+  text-align: left;
+}
+
+.form-error-list {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.form-error-list li {
+  margin-bottom: 4px;
+}

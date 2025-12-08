@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    attributes:
+      training_record:
+        weight: "重量"
+        reps: "回数"
+        sets: "セット数"
