@@ -58,31 +58,8 @@
   align-items: center;
 }
 
-/* ボタン基本 */
-.header-link {
-  padding: 6px 14px;
-  font-size: 14px;
-  border-radius: 6px;
-  text-decoration: none;
-  color: #fff;
-  background: #222;
-  border: 1px solid #444;
-  transition: 0.2s;
-}
-
-/* 新規登録 */
-.header-link--primary {
-  background: #0d6efd;
-  border-color: #0d6efd;
-}
-
 /* ログアウト */
 .header-link--danger {
   background: #dc3545;
   border-color: #dc3545;
-}
-
-/* ホバー時 */
-.header-link:hover {
-  background: #333;
 }

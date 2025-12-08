@@ -23,8 +23,8 @@
             </span>
             <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } ,class: "header-link header-link--danger"%>
           <% else %>
-            <%= link_to "ログイン", new_user_session_path , class: "header-link" %>
-            <%= link_to "新規登録", new_user_registration_path ,class: "header-link header-link--primary" %>
+            <%= link_to "ログイン", new_user_session_path , class: "btn btn-secondary" %>
+            <%= link_to "新規登録", new_user_registration_path ,class: "btn btn-primary" %>
           <% end %>
         </nav>
       </div>
