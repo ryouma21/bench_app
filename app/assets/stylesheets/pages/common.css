@@ -1,4 +1,4 @@
-.auth-error-message {
+.form-error-message {
   background: rgba(255, 80, 80, 0.12);
   border: 1px solid rgba(255, 80, 80, 0.3);
   color: #ff8c8c;
@@ -8,7 +8,7 @@
   font-size: 14px;
 }
 
-.auth-error-title {
+.form-error-title {
   margin: 0 0 8px;
   font-weight: bold;
   font-size: 14px;
@@ -16,11 +16,11 @@
   text-align: left;
 }
 
-.auth-error-list {
+.form-error-list {
   padding-left: 18px;
   margin: 0;
 }
 
-.auth-error-list li {
+.form-error-list li {
   margin-bottom: 4px;
 }
