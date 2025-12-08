@@ -1,10 +1,10 @@
 <% if resource.errors.any? %>
-  <div class="auth-error-message" data-turbo-cache="false">
-    <p class="auth-error-title">
+  <div class="form-error-message" data-turbo-cache="false">
+    <p class="form-error-title">
       <%= resource.errors.count %> 件のエラーがあります
     </p>
     
-    <ul class="auth-error-list">
+    <ul class="form-error-list">
       <% resource.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>

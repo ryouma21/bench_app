@@ -1,7 +1,10 @@
 <% if object && object.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= object.errors.count %>件のエラーがあります</h2>
-    <ul>
+  <div class="form-error-message">
+    <p class="form-error-title">
+      <%= object.errors.count %> 件のエラーがあります
+    </p>
+
+    <ul class="form-error-list">
       <% object.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
