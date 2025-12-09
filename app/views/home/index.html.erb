@@ -17,7 +17,7 @@
               メニューを作成できません
             <% end %>
           </div>
-
+        <% if false %>
           <div id="menu-sub" class="menu-sub-text">
             休憩：2〜3分 / RPE：8
           </div>
@@ -26,6 +26,7 @@
           <div id="advice" class="menu-advice-text">
             肩をすくめず、胸をしっかり張ることを意識しよう。
           </div>
+        <% end %>
         </section>
 
       <% elsif current_user.training_records.count == 0 %>
@@ -106,8 +107,10 @@
 
         <div class="card menu-sample">
           <h4 class="sample-menu-main">ベンチプレス 75kg × 5回 × 4セット</h4>
+        <% if false %>
           <p class="sample-menu-sub">休憩：2〜3分 / RPE：8</p>
           <p class="sample-menu-advice">肩をすくめず胸を張る意識。</p>
+        <% end %>
         </div>
       </div>
     <% end %>
