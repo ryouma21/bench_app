@@ -4,55 +4,87 @@
       <!-- Today’s Menu タイトル -->
       <div class="section-title">Today’s Menu</div>
 
-      <!-- メインメニューカード -->
-      <section class="card menu-card">
-        <div id="menu-main" class="menu-main-text">
-          <% if @today_menu.present? %>
-            ベンチプレス <%= @today_menu[:weight] %>kg ×
-            <%= @today_menu[:reps] %>回 ×
-            <%= @today_menu[:sets] %>セット
-          <% else %>
-            メニューを作成できません
-          <% end %>
-        </div>
-
-        <div id="menu-sub" class="menu-sub-text">
-          休憩：2〜3分 / RPE：8
-        </div>
-
-        <div class="menu-advice-label">今日の意識</div>
-        <div id="advice" class="menu-advice-text">
-          肩をすくめず、胸をしっかり張ることを意識しよう。
-        </div>
-      </section>
-
-      <!-- ボタンエリア -->
-      <div class="button-group">
+      <!-- ▼ 状況に応じた分岐 -->
       <% if @today_menu.present? %>
-        <%= link_to new_training_record_path(weight: @today_menu[:weight], reps:   @today_menu[:reps], sets:   @today_menu[:sets]
-        ), id: "record-btn", class: "btn btn-primary" do %>
-        このメニューで記録する<% end %>
+        <!-- メインメニューカード -->
+        <section class="card menu-card">
+          <div id="menu-main" class="menu-main-text">
+            <% if @today_menu.present? %>
+              ベンチプレス <%= @today_menu[:weight] %>kg ×
+              <%= @today_menu[:reps] %>回 ×
+              <%= @today_menu[:sets] %>セット
+            <% else %>
+              メニューを作成できません
+            <% end %>
+          </div>
+
+          <div id="menu-sub" class="menu-sub-text">
+            休憩：2〜3分 / RPE：8
+          </div>
+
+          <div class="menu-advice-label">今日の意識</div>
+          <div id="advice" class="menu-advice-text">
+            肩をすくめず、胸をしっかり張ることを意識しよう。
+          </div>
+        </section>
+
+      <% elsif current_user.training_records.count == 0 %>
+
+       <!--  記録が 0 件のユーザー -->
+        <section class="card menu-card">
+          <div class="menu-main-text">
+            まだトレーニング記録がありません。
+            最初の記録を追加すると、メニューを自動で作成できます。
+          </div>
+
+          <div class="mt-3">
+            <%= link_to "最初の記録を追加する",
+                new_training_record_path,
+                class: "btn btn-primary" %>
+          </div>
+        </section>
+      <% else %>
+        <!--  記録はあるがメニューが作れない（1RM計算不可など） -->
+        <section class="card menu-card">
+          <div class="menu-main-text">
+            メニューを作成できませんでした。
+            記録をもう少し追加してみてください。
+          </div>
+        </section>
       <% end %>
-        <button id="change-btn" class="btn btn-secondary">
-          他のメニューを提案してもらう
-        </button>
 
-         <!-- ▼ 新しい2つのボタン（最初は非表示） -->
-        <div id="alt-menu-buttons" class="alt-menu-buttons">
-          <button id="lighter-btn" class="btn btn-secondary">
-            フォーム重視でやる
+      <!-- ボタンエリア （メニューがあるときだけ表示）-->
+      <% if @today_menu.present? %>
+        <div class="button-group">
+          <%= link_to new_training_record_path(weight: @today_menu[:weight],
+                                              reps:   @today_menu[:reps], 
+                                              sets:   @today_menu[:sets]), 
+                      id: "record-btn", 
+                      class: "btn btn-primary" do %>
+          このメニューで記録する
+          <% end %>
+          <!-- 他のメニュー -->
+          <button id="change-btn" class="btn btn-secondary">
+            他のメニューを提案してもらう
           </button>
+          <!-- ▼ 記録ゼロ or メニュー不可のときは change-btn を出さない 2つのボタン（最初は非表示） -->
+          <div id="alt-menu-buttons" class="alt-menu-buttons">
+            <button id="lighter-btn" class="btn btn-secondary">
+              フォーム重視でやる
+            </button>
 
-          <button id="heavier-btn" class="btn btn-secondary">
-            刺激を入れてみる
-          </button>
+            <button id="heavier-btn" class="btn btn-secondary">
+              刺激を入れてみる
+            </button>
+          </div>
         </div>
-      </div>
-
+      
       <p class="hint-text">
         迷ったら、このメニューから始めればOKです。
       </p>
+    <% end %>
     <% else %>
+      <!-- ▼ 非ログイン時の画面 -->
       <div class="card welcome-card">
         <h2 class="welcome-title">BenchApp</h2>
         <p class="welcome-desc">
