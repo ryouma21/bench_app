@@ -7,6 +7,7 @@ document.addEventListener("turbo:load", () => {
   const heavierBtn      = document.getElementById("heavier-btn");
   const menuMain        = document.getElementById("menu-main");
   const recordBtn = document.getElementById("record-btn");
+  const menuHint        = document.getElementById("menu-hint");
 
   // もしホーム画面じゃなかったら何もしない安全策
   if (!changeBtn || !altMenuBtnArea  || !menuMain)
@@ -16,6 +17,8 @@ document.addEventListener("turbo:load", () => {
   changeBtn.addEventListener("click", () => {
     changeBtn.style.display = "none";       // 元のボタンは隠す
     altMenuBtnArea.style.display = "block"; // 軽め/重めボタンを見せる
+
+    if (menuHint) menuHint.style.display = "none";
   });
 
   // 「フォーム重視でやる」押したとき → 軽めメニューをRailsからfetch
