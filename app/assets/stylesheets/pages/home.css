@@ -185,3 +185,11 @@
 .alt-menu-buttons .btn {
   margin-top: 8px; /* ← 各ボタン同士の間隔 */
 }
+
+.first-user-hint {
+  text-align: center;
+  color: #bbb;
+  margin-top: 24px;
+  font-size: 14px;
+  line-height: 1.6;
+}
