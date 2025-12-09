@@ -31,7 +31,7 @@
       <% elsif current_user.training_records.count == 0 %>
 
        <!--  記録が 0 件のユーザー -->
-        <section class="card menu-card">
+        <section class="first-user-card card">
           <div class="menu-main-text">
             まだトレーニング記録がありません。
             最初の記録を追加すると、メニューを自動で作成できます。
@@ -44,10 +44,12 @@
           </div>
         </section>
         <!-- ▼ 初回ユーザー向けの説明（カードの外に配置） -->
-        <div class="first-user-hint">
-          <p>📌 BenchApp は、あなたの記録から自動で<br>
-            「今日の最適メニュー」を作成してくれます。</p>
-          <p>まずは最初の1件を追加してみましょう。</p>
+        <div class="first-user-card card">
+          <div class="first-user-hint">
+            <p>📌 BenchApp は、あなたの記録から自動で<br>
+              「今日の最適メニュー」を作成してくれます。</p>
+            <p>まずは最初の1件を追加してみましょう。</p>
+          </div>
         </div>
       <% else %>
         <!--  記録はあるがメニューが作れない（1RM計算不可など） -->
