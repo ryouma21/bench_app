@@ -17,7 +17,7 @@
               メニューを作成できません
             <% end %>
           </div>
-
+        <% if false %>
           <div id="menu-sub" class="menu-sub-text">
             休憩：2〜3分 / RPE：8
           </div>
@@ -26,6 +26,7 @@
           <div id="advice" class="menu-advice-text">
             肩をすくめず、胸をしっかり張ることを意識しよう。
           </div>
+        <% end %>
         </section>
 
       <% elsif current_user.training_records.count == 0 %>
