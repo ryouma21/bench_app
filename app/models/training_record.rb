@@ -30,13 +30,19 @@ class TrainingRecord < ApplicationRecord
     .joins("INNER JOIN (
             SELECT training_date, MAX(created_at) AS max_created_at
             FROM training_records
-            WHERE weight IS NOT NULL AND reps IS NOT NULL
+            WHERE weight IS NOT NULL AND reps IS NOT NULL   AND weight >= 30  
             GROUP BY training_date
           ) AS daily
           ON training_records.training_date = daily.training_date
           AND training_records.created_at = daily.max_created_at")
 }
 
+# ------- ② valid_records（分析に使うクリーンなデータ）-------
+  def self.valid_records
+    latest_valid_per_day
+      .select { |r| r.estimated_one_rm.present? }  # 1RMが計算できるものだけ
+  end
+  
   private
 
   def set_total_volume
