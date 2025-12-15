@@ -17,12 +17,6 @@ class TrainingRecord < ApplicationRecord
     one_rm.round(1)
   end
 
-  def self.weekly_volume(user)
-    # 過去7日間の total_volume の合計を返す
-    where(user: user, training_date: 7.days.ago.to_date..Date.today)
-    .sum(:total_volume)
-  end
-
   # =========================
   #  分析用スコープ群
   # =========================
@@ -53,14 +47,23 @@ class TrainingRecord < ApplicationRecord
   }
 
 # ------- フェーズ0用 基準1RM-------
-  def self.reference_one_rm
+  # 直近14日以内の最高1RM（下がらない基準）
+  scope :reference_one_rm, -> {
     where(training_date: 14.days.ago.to_date..Date.today)
-      .with_one_rm
       .map(&:estimated_one_rm)
       .compact
       .max
-  end
+  }
   
+  # ===============================
+  # 補助ロジック
+  # ===============================
+  def self.weekly_volume(user)
+    # 過去7日間の total_volume の合計を返す
+    where(user: user, training_date: 7.days.ago.to_date..Date.today)
+    .sum(:total_volume)
+  end
+
   private
 
   def set_total_volume
