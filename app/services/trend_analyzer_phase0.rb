@@ -11,7 +11,7 @@ class TrendAnalyzerPhase0
     latest    = latest_one_rm
 
     return :flat if reference.nil? || latest.nil?
-
+      # -5% 以内は維持
     if latest < reference * 0.95
       :down
     else
@@ -23,7 +23,7 @@ class TrendAnalyzerPhase0
 
   def reference_one_rm
     @records
-      .select { |r| r.training_date >= 14.days.ago.to_date }
+      .recent_days(14)
       .map(&:estimated_one_rm)
       .compact
       .max

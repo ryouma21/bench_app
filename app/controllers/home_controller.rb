@@ -12,7 +12,7 @@ class HomeController < ApplicationController
   end
 
   # ② トレンドを計算
-  trend = TrendAnalyzer.new(records).trend
+  trend = TrendAnalyzerPhase0.new(records).trend
 
   # ③ 最新の1RMを取り出す
   latest_one_rm = records.last.estimated_one_rm
