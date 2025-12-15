@@ -62,6 +62,11 @@ class TrainingRecord < ApplicationRecord
     .sum(:total_volume)
   end
 
+  scope :recent_days, ->(days) {
+    where(training_date: days.days.ago.to_date..Date.today)
+  }
+
+
   private
 
   def set_total_volume
