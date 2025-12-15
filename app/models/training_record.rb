@@ -23,24 +23,42 @@ class TrainingRecord < ApplicationRecord
     .sum(:total_volume)
   end
 
-  # 1日につき、「weight と reps が揃っているセット」の中で
-  # 最新の1件だけを抽出するスコープ
-  scope :latest_valid_per_day, -> {
-   select("training_records.*")
-    .joins("INNER JOIN (
-            SELECT training_date, MAX(created_at) AS max_created_at
-            FROM training_records
-            WHERE weight IS NOT NULL AND reps IS NOT NULL   AND weight >= 30  
-            GROUP BY training_date
-          ) AS daily
-          ON training_records.training_date = daily.training_date
-          AND training_records.created_at = daily.max_created_at")
-}
+  # =========================
+  #  分析用スコープ群
+  # =========================
+  #  # weight / reps が入っている記録のみ
+  scope :with_one_rm, -> {
+    where.not(weight: nil, reps: nil)
+      .where("weight >= 30")
+  }
+  # 1日1件（最新）のみ抽出
+  scope :latest_per_day, -> {
+    select("training_records.*")
+      .joins(<<~SQL)
+        INNER JOIN (
+          SELECT training_date, MAX(created_at) AS max_created_at
+          FROM training_records
+          WHERE weight IS NOT NULL
+            AND reps IS NOT NULL
+            AND weight >= 30
+          GROUP BY training_date
+        ) AS daily
+        ON training_records.training_date = daily.training_date
+        AND training_records.created_at = daily.max_created_at
+      SQL
+  }
+  # 分析に使う「クリーンな記録」
+  scope :valid_records, -> {
+    with_one_rm.latest_per_day
+  }
 
-# ------- ② valid_records（分析に使うクリーンなデータ）-------
-  def self.valid_records
-    latest_valid_per_day
-      .select { |r| r.estimated_one_rm.present? }  # 1RMが計算できるものだけ
+# ------- フェーズ0用 基準1RM-------
+  def self.reference_one_rm
+    where(training_date: 14.days.ago.to_date..Date.today)
+      .with_one_rm
+      .map(&:estimated_one_rm)
+      .compact
+      .max
   end
   
   private
