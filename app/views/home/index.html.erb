@@ -7,6 +7,11 @@
       <!-- ▼ 状況に応じた分岐 -->
       <% if @today_menu.present? %>
         <!-- メインメニューカード -->
+        <% if @trend_message.present? %>
+          <p class="trend-message">
+            <%= @trend_message %>
+          </p>
+        <% end %>
         <section class="card menu-card">
           <div id="menu-main" class="menu-main-text">
             <% if @today_menu.present? %>

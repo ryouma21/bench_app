@@ -40,8 +40,8 @@ class TrainingRecord < ApplicationRecord
   # 分析に使う「クリーンな記録」
   scope :valid_records, -> {
      latest_per_day
-      .select { |r| r.estimated_one_rm.present? }
-      .sort_by(&:training_date)
+    .where.not(weight: nil, reps: nil)
+    .order(:training_date)
   }
 
 # ------- フェーズ0用 基準1RM-------
@@ -61,9 +61,17 @@ class TrainingRecord < ApplicationRecord
     where(user: user, training_date: 7.days.ago.to_date..Date.today)
     .sum(:total_volume)
   end
-
+  # 直近◯日分
   scope :recent_days, ->(days) {
     where(training_date: days.days.ago.to_date..Date.today)
+  }
+
+  # フェーズ0用 reference_1rm
+  scope :reference_one_rm, -> {
+    recent_days(14)
+      .map(&:estimated_one_rm)
+      .compact
+      .max
   }
 
 

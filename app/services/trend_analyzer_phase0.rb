@@ -7,8 +7,8 @@ class TrendAnalyzerPhase0
   def trend
     return :flat if @records.blank?
 
-    reference = reference_one_rm
-    latest    = latest_one_rm
+    reference = reference_one_rm # 直近14日で一番高かった1RM
+    latest    = latest_one_rm # 最新の1RM
 
     return :flat if reference.nil? || latest.nil?
       # -5% 以内は維持
@@ -16,6 +16,16 @@ class TrendAnalyzerPhase0
       :down
     else
       :flat
+    end
+  end
+
+    # UX用メッセージ
+  def message
+    case trend
+    when :flat
+      "基礎は安定しています。この調子で続けましょう。"
+    when :down
+      "少し疲れが見えます。今日は回復寄りでいきましょう。"
     end
   end
 
