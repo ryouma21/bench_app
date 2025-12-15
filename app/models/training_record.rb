@@ -9,12 +9,8 @@ class TrainingRecord < ApplicationRecord
   def estimated_one_rm
     # 重量か回数が入っていなかったら計算できないので nil を返す
     return nil if weight.blank? || reps.blank?
-
-    # reps.to_f として小数計算にする（整数同士だと割り算がズレるため）
-    one_rm = weight * (1 + reps.to_f / 30)
-
-    # 小数第1位までに丸める（例：93.333... → 93.3）
-    one_rm.round(1)
+    # reps.to_f として小数計算にする（整数同士だと割り算がズレるため）小数第1位までに丸める（例：93.333... → 93.3）
+    (weight * (1 + reps.to_f / 30)).round(1)
   end
 
   # =========================
@@ -43,7 +39,9 @@ class TrainingRecord < ApplicationRecord
   }
   # 分析に使う「クリーンな記録」
   scope :valid_records, -> {
-    with_one_rm.latest_per_day
+     latest_per_day
+      .select { |r| r.estimated_one_rm.present? }
+      .sort_by(&:training_date)
   }
 
 # ------- フェーズ0用 基準1RM-------
