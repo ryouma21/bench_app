@@ -29,6 +29,17 @@ class TrendAnalyzerPhase0
     end
   end
 
+  # Phase0.5用：直近平均1RM
+  def reference_recent_average
+    rms = @records
+            .recent_days(14)
+            .map(&:estimated_one_rm)
+            .compact
+
+    return nil if rms.empty?
+    rms.sum / rms.size
+  end
+
   private
 
   def reference_one_rm
