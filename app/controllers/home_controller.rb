@@ -18,8 +18,23 @@ class HomeController < ApplicationController
     # ③ 最新の1RMを取り出す
     latest_one_rm = records.last.estimated_one_rm
 
-    # ④ 今日のメニューを生成
-    @today_menu = MenuGenerator.new(latest_one_rm, trend).menu
+    # 直近14日間の平均1RMを基準値として使用する
+    # ※ 有効な1RMが十分に取れない場合は、無理にメニューを出さず nil にする
+    reference_one_rm = analyzer.reference_recent_average
+
+    # 基準となる平均1RMが取得できない場合
+    # （記録不足・直近に有効な1RMがない等）は安全のためメニューを表示しない
+    if reference_one_rm.nil?
+      @today_menu = nil
+      return
+    end
+
+    # ⑤ 今日のメニューを生成
+    @today_menu = MenuGenerator.new(
+      latest_one_rm: latest_one_rm,
+      reference_one_rm: reference_one_rm,
+      trend: trend
+    ).menu
 
     # ★ フェーズ0用メッセージ
     @trend_message = analyzer.message
