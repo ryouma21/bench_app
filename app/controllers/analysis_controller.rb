@@ -2,7 +2,7 @@ class AnalysisController < ApplicationController
   def index
     # ① 過去の記録
     records = current_user.training_records
-              .latest_valid_per_day
+              .latest_per_day
               .order(training_date: :desc)
               .limit(5)
               .reverse  
