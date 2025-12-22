@@ -3,6 +3,11 @@
     <% if user_signed_in? %>
       <!-- Today’s Menu タイトル -->
       <div class="section-title">Today’s Menu</div>
+      <% if @measurement_recommendation.present? %>
+        <p class="trend-message">
+          <%= @measurement_recommendation %>
+        </p>
+      <% end %>
 
       <!-- ▼ 状況に応じた分岐 -->
       <% if @today_menu.present? %>
@@ -72,7 +77,8 @@
         <div class="button-group">
           <%= link_to new_training_record_path(weight: @today_menu[:weight],
                                               reps:   @today_menu[:reps], 
-                                              sets:   @today_menu[:sets]), 
+                                              sets:   @today_menu[:sets]
+                                              set_type: "volume"),
                       id: "record-btn", 
                       class: "btn btn-primary" do %>
           このメニューで記録する
@@ -81,6 +87,13 @@
           <button id="change-btn" class="btn btn-secondary">
             他のメニューを提案してもらう
           </button>
+          <% if @measurement_recommendation.present? %>
+            <%= link_to new_training_record_path(set_type: "measurement"),
+                        class: "btn btn-secondary" do %>
+              測定用（1〜3回）を記録する
+            <% end %>
+          <% end %>
+
           <!-- ▼ 記録ゼロ or メニュー不可のときは change-btn を出さない 2つのボタン（最初は非表示） -->
           <div id="alt-menu-buttons" class="alt-menu-buttons">
             <button id="lighter-btn" class="btn btn-secondary">
