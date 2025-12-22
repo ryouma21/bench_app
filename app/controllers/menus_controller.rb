@@ -1,23 +1,32 @@
 class MenusController < ApplicationController
+  before_action :authenticate_user!
+
   def lighter
-    render json: current_user.suggested_lighter_menu
+    render json: build_menu(:lighter)
   end
 
   def heavier
-    render json: current_user.suggested_heavier_menu
+    render json: build_menu(:heavier)
   end
 
-  def todays_menu
-  # 1. valid_records を取る
-  records = current_user.training_records.valid_records
+  private
 
-  # 2. トレンドを判定
-  trend = TrendAnalyzer.new(records).trend
+  def build_menu(intensity)
+    records = current_user.training_records.measurement_records.valid_records
+    return {} if records.blank? || records.last&.estimated_one_rm.nil?
 
-  # 3. 最新1RM取得
-  latest_one_rm = records.last.estimated_one_rm
+    analyzer = TrendAnalyzerPhase0.new(records)
+    trend = analyzer.trend
 
-  # 4. 今日のメニューを生成
-  @today_menu = MenuGenerator.new(latest_one_rm, trend).menu
+    latest_one_rm = records.last.estimated_one_rm
+    reference_one_rm = analyzer.reference_recent_average
+    return {} if reference_one_rm.nil?
+
+    MenuGenerator.new(
+      latest_one_rm: latest_one_rm,
+      reference_one_rm: reference_one_rm,
+      trend: trend
+    ).menu(intensity)
   end
 end
+
