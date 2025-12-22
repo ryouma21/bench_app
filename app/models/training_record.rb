@@ -2,6 +2,9 @@ class TrainingRecord < ApplicationRecord
   belongs_to :user
 
   enum set_type: { measurement: 0, volume: 1 }
+  scope :measurement_records, -> { where(set_type: :measurement) }
+  scope :volume_records,      -> { where(set_type: :volume) }
+
   # has_one :form_check, dependent: :destroy
 
   before_save :set_total_volume
@@ -44,15 +47,6 @@ class TrainingRecord < ApplicationRecord
      latest_per_day
     .where.not(weight: nil, reps: nil)
     .order(:training_date)
-  }
-
-# ------- フェーズ0用 基準1RM-------
-  # 直近14日以内の最高1RM（下がらない基準）
-  scope :reference_one_rm, -> {
-    where(training_date: 14.days.ago.to_date..Date.today)
-      .map(&:estimated_one_rm)
-      .compact
-      .max
   }
   
   # ===============================
