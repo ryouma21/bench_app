@@ -1,5 +1,7 @@
 class TrainingRecord < ApplicationRecord
   belongs_to :user
+
+  enum set_type: { measurement: 0, volume: 1 }
   # has_one :form_check, dependent: :destroy
 
   before_save :set_total_volume
