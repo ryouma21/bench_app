@@ -71,8 +71,16 @@
           </div>
         </section>
       <% end %>
-
-      <!-- ボタンエリア （メニューがあるときだけ表示）-->
+      <!-- 測定ボタンはメニュー有無に関係なく出す -->
+      <% if @measurement_recommendation.present? %>
+        <div class="button-group">
+          <%= link_to new_training_record_path(set_type: "measurement"),
+                      class: "btn btn-secondary" do %>
+            測定用（1〜3回）を記録する
+          <% end %>
+        </div>
+      <% end %>
+      <!-- （メニューがあるときだけ表示）-->
       <% if @today_menu.present? %>
         <div class="button-group">
           <%= link_to new_training_record_path(weight: @today_menu[:weight],
@@ -87,12 +95,6 @@
           <button id="change-btn" class="btn btn-secondary">
             他のメニューを提案してもらう
           </button>
-          <% if @measurement_recommendation.present? %>
-            <%= link_to new_training_record_path(set_type: "measurement"),
-                        class: "btn btn-secondary" do %>
-              測定用（1〜3回）を記録する
-            <% end %>
-          <% end %>
 
           <!-- ▼ 記録ゼロ or メニュー不可のときは change-btn を出さない 2つのボタン（最初は非表示） -->
           <div id="alt-menu-buttons" class="alt-menu-buttons">
