@@ -26,12 +26,13 @@ document.addEventListener("turbo:load", () => {
     fetch("/menus/lighter")
       .then(res => res.json())
       .then(data => {
+        if (data.error) return;
         menuMain.textContent =
           `ベンチプレス ${data.weight}kg × ${data.reps}回 × ${data.sets}セット`;
 
         // 記録ボタンのURLを更新
         recordBtn.href =
-          `/training_records/new?weight=${data.weight}&reps=${data.reps}&sets=${data.sets}`;
+          `/training_records/new?weight=${data.weight}&reps=${data.reps}&sets=${data.sets}&set_type=volume`;
       });
   });
 
@@ -40,11 +41,12 @@ document.addEventListener("turbo:load", () => {
     fetch("/menus/heavier")
       .then(res => res.json())
       .then(data => {
+        if (data.error) return;
         menuMain.textContent =
           `ベンチプレス ${data.weight}kg × ${data.reps}回 × ${data.sets}セット`;
         
         recordBtn.href =
-        `/training_records/new?weight=${data.weight}&reps=${data.reps}&sets=${data.sets}`;
+        `/training_records/new?weight=${data.weight}&reps=${data.reps}&sets=${data.sets}&set_type=volume`;
       });
   });
 });
