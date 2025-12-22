@@ -71,8 +71,8 @@
           </div>
         </section>
       <% end %>
-      <!-- 測定ボタンはメニュー有無に関係なく出す -->
-      <% if @measurement_recommendation.present? %>
+      <!-- 測定ボタン 記録が1件以上ある時だけ出す -->
+      <% if @measurement_recommendation.present? && current_user.training_records.exists? %>
         <div class="button-group">
           <%= link_to new_training_record_path(set_type: "measurement"),
                       class: "btn btn-primary" do %>
