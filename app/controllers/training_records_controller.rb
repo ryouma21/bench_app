@@ -8,7 +8,8 @@ class TrainingRecordsController < ApplicationController
       training_date: Date.current,
       weight: params[:weight],
       reps:   params[:reps],
-      sets:   params[:sets]
+      sets:   params[:sets],
+      set_type: params[:set_type]
     )
   end
 
@@ -65,6 +66,6 @@ class TrainingRecordsController < ApplicationController
   end
 
   def training_record_params
-    params.require(:training_record).permit(:training_date, :weight, :reps, :sets, :fatigue_level, :advice)
+    params.require(:training_record).permit(:training_date, :weight, :reps, :sets, :fatigue_level, :advice, :set_type)
   end
 end

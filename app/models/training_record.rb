@@ -1,5 +1,10 @@
 class TrainingRecord < ApplicationRecord
   belongs_to :user
+
+  enum set_type: { measurement: 0, volume: 1 }
+  scope :measurement_records, -> { where(set_type: :measurement) }
+  scope :volume_records,      -> { where(set_type: :volume) }
+
   # has_one :form_check, dependent: :destroy
 
   before_save :set_total_volume
@@ -9,33 +14,62 @@ class TrainingRecord < ApplicationRecord
   def estimated_one_rm
     # 重量か回数が入っていなかったら計算できないので nil を返す
     return nil if weight.blank? || reps.blank?
-
-    # reps.to_f として小数計算にする（整数同士だと割り算がズレるため）
-    one_rm = weight * (1 + reps.to_f / 30)
-
-    # 小数第1位までに丸める（例：93.333... → 93.3）
-    one_rm.round(1)
+    # reps.to_f として小数計算にする（整数同士だと割り算がズレるため）小数第1位までに丸める（例：93.333... → 93.3）
+    (weight * (1 + reps.to_f / 30)).round(1)
   end
 
+  # =========================
+  #  分析用スコープ群
+  # =========================
+  #  # weight / reps が入っている記録のみ
+  scope :with_one_rm, -> {
+    where.not(weight: nil, reps: nil)
+      .where("weight >= 30")
+  }
+  # 1日1件（最新）のみ抽出
+  scope :latest_per_day, -> {
+    select("training_records.*")
+      .joins(<<~SQL)
+        INNER JOIN (
+          SELECT training_date, MAX(created_at) AS max_created_at
+          FROM training_records
+          WHERE weight IS NOT NULL
+            AND reps IS NOT NULL
+            AND weight >= 30
+          GROUP BY training_date
+        ) AS daily
+        ON training_records.training_date = daily.training_date
+        AND training_records.created_at = daily.max_created_at
+      SQL
+  }
+  # 分析に使う「クリーンな記録」
+  scope :valid_records, -> {
+     latest_per_day
+    .where.not(weight: nil, reps: nil)
+    .order(:training_date)
+  }
+  
+  # ===============================
+  # 補助ロジック
+  # ===============================
   def self.weekly_volume(user)
     # 過去7日間の total_volume の合計を返す
     where(user: user, training_date: 7.days.ago.to_date..Date.today)
     .sum(:total_volume)
   end
+  # 直近◯日分
+  scope :recent_days, ->(days) {
+    where(training_date: days.days.ago.to_date..Date.today)
+  }
 
-  # 1日につき、「weight と reps が揃っているセット」の中で
-  # 最新の1件だけを抽出するスコープ
-  scope :latest_valid_per_day, -> {
-   select("training_records.*")
-    .joins("INNER JOIN (
-            SELECT training_date, MAX(created_at) AS max_created_at
-            FROM training_records
-            WHERE weight IS NOT NULL AND reps IS NOT NULL
-            GROUP BY training_date
-          ) AS daily
-          ON training_records.training_date = daily.training_date
-          AND training_records.created_at = daily.max_created_at")
-}
+  # フェーズ0用 reference_1rm
+  scope :reference_one_rm, -> {
+    recent_days(14)
+      .map(&:estimated_one_rm)
+      .compact
+      .max
+  }
+
 
   private
 
