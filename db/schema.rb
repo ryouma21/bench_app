@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_27_044953) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_22_004112) do
   create_table "training_records", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "weight", null: false
@@ -22,6 +22,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_27_044953) do
     t.date "training_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "set_type", default: 1, null: false
+    t.index ["set_type"], name: "index_training_records_on_set_type"
     t.index ["user_id"], name: "index_training_records_on_user_id"
   end
 
