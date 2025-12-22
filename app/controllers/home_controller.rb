@@ -2,6 +2,24 @@ class HomeController < ApplicationController
   def index
     return unless user_signed_in?
 
+    # 0) 最後の測定日を取得（training_date基準）
+    last_measurement_date =
+      current_user.training_records.measurement.maximum(:training_date)
+
+    # 1) 7日以上空いてたら true（=ボタン表示）
+    @show_measurement_button =
+      last_measurement_date.nil? || last_measurement_date <= 7.days.ago.to_date
+
+    # 2) 表示メッセージ
+    if last_measurement_date.nil?
+      @measurement_recommendation = "まずは測定用（1〜3回）の記録を1回追加すると、メニューを安定して作れます。"
+    elsif @show_measurement_button
+      days = (Date.current - last_measurement_date).to_i
+      @measurement_recommendation = "前回の測定から#{days}日経ちました。目安：週1回（7日）で測定しましょう。"
+    else
+      @measurement_recommendation = nil
+    end
+
     # ① valid_records を取得（TrainingRecordモデルのスコープを使用）
     records = current_user.training_records.measurement_records.valid_records
 

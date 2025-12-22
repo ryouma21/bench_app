@@ -3,11 +3,6 @@
     <% if user_signed_in? %>
       <!-- Today’s Menu タイトル -->
       <div class="section-title">Today’s Menu</div>
-      <% if @measurement_recommendation.present? %>
-        <p class="trend-message">
-          <%= @measurement_recommendation %>
-        </p>
-      <% end %>
 
       <!-- ▼ 状況に応じた分岐 -->
       <% if @today_menu.present? %>
@@ -71,13 +66,17 @@
           </div>
         </section>
       <% end %>
+      <!-- 測定案内メッセージ（あれば表示） -->
+      <% if @measurement_recommendation.present? %>
+        <p class="trend-message"><%= @measurement_recommendation %></p>
+      <% end %>
       <!-- 測定ボタン 記録が1件以上ある時だけ出す -->
-      <% if @measurement_recommendation.present? && current_user.training_records.exists? %>
+      <% if @show_measurement_button && current_user.training_records.exists?%>
         <div class="button-group">
           <%= link_to new_training_record_path(set_type: "measurement"),
                       class: "btn btn-primary" do %>
             測定用（1〜3回）を記録する
-          <% end %>
+          <% end %> 
         </div>
       <% end %>
       <!-- （メニューがあるときだけ表示）-->
