@@ -3,11 +3,12 @@ class HomeController < ApplicationController
     return unless user_signed_in?
 
     # ① valid_records を取得（TrainingRecordモデルのスコープを使用）
-    records = current_user.training_records.valid_records
+    records = current_user.training_records.measurement_records.valid_records
 
     # 記録がゼロ or 1RMがない → メニュー作成不可
-    if records.blank? || records.last.estimated_one_rm.nil?
+    if records.blank?
       @today_menu = nil
+      @measurement_recommendation = "まずは測定用（1〜3回）の記録を1回追加すると、メニューを安定して作れます。"
       return
     end
 
