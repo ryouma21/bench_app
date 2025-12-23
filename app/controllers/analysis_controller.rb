@@ -2,7 +2,7 @@ class AnalysisController < ApplicationController
   def index
     # ① グラフ用：1日1件の記録（直近5日）
     graph_records = current_user.training_records
-                                .latest_per_day
+                                .valid_measurement_records 
                                 .order(training_date: :desc)
                                 .limit(5)
                                 .reverse
