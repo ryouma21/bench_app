@@ -48,7 +48,29 @@ class TrainingRecord < ApplicationRecord
     .where.not(weight: nil, reps: nil)
     .order(:training_date)
   }
-  
+
+  # 測定（measurement）だけを分析に使うためのスコープ
+  scope :latest_measurement_per_day, -> {
+  select("training_records.*")
+    .joins(<<~SQL)
+      INNER JOIN (
+        SELECT training_date, MAX(created_at) AS max_created_at
+        FROM training_records
+        WHERE weight IS NOT NULL
+          AND reps IS NOT NULL
+          AND weight >= 30
+          AND set_type = 'measurement'
+        GROUP BY training_date
+      ) AS daily
+      ON training_records.training_date = daily.training_date
+      AND training_records.created_at = daily.max_created_at
+    SQL
+}
+# 分析で扱いやすい形（並び順）にする
+scope :valid_measurement_records, -> {
+  latest_measurement_per_day.order(:training_date)
+}
+
   # ===============================
   # 補助ロジック
   # ===============================
