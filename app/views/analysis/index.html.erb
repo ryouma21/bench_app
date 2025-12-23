@@ -3,18 +3,6 @@
   <div class="analysis-container">
     <h1>データ分析</h1>
 
-    <h2>今日のおすすめメニュー</h2>
-
-    <% if @today_menu.present? %>
-      <p>
-        目安：<%= @today_menu[:percentage] %>%  
-        ／ 重量：<%= @today_menu[:weight] %>kg  
-        ／ <%= @today_menu[:reps] %>回 × <%= @today_menu[:sets] %>セット
-      </p>
-    <% else %>
-      <p>まだ記録がないため計算できません。</p>
-    <% end %>
-
     <h2>週間総ボリューム</h2>
     <p><%= @weekly_volume %> kg</p>
 
