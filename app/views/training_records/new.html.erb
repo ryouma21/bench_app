@@ -2,11 +2,13 @@
   <div class="container">
     <h1 class="page-title">記録を追加する</h1>
 
-    <%= render "shared/error_messages", object: @training_record %>
-
     <div class="card form-card">
 
       <%= form_with model: @training_record, local: true do |f| %>
+
+        <%= render "shared/error_messages", object: @training_record %>
+
+        <%= f.hidden_field :menu_type %>
 
         <div class="form-group">
           <p class="form-label">記録の種類</p>

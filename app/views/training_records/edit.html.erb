@@ -7,6 +7,7 @@
 
       <%= form_with model: @training_record, local: true do |f| %>
         <%= render "shared/error_messages", object: @training_record %>
+        <%= f.hidden_field :menu_type %>
 
         <div class="form-group">
           <label>日付</label>
