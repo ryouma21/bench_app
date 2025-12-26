@@ -45,7 +45,7 @@
 
           <div class="mt-3">
             <%= link_to "最初の記録を追加する",
-                new_training_record_path(set_type: "measurement"),
+                new_training_record_path(set_type: "measurement", menu_type: "free"),
                 class: "btn btn-primary" %>
           </div>
         </section>
@@ -73,7 +73,7 @@
       <!-- 測定ボタン 記録が1件以上ある時だけ出す -->
       <% if @show_measurement_button && current_user.training_records.exists?%>
         <div class="button-group">
-          <%= link_to new_training_record_path(set_type: "measurement"),
+          <%= link_to new_training_record_path(set_type: "measurement", menu_type: "free"),
                       class: "btn btn-primary" do %>
             測定用（1〜3回）を記録する
           <% end %> 
@@ -85,7 +85,8 @@
           <%= link_to new_training_record_path(weight: @today_menu[:weight],
                                               reps:   @today_menu[:reps], 
                                               sets:   @today_menu[:sets],
-                                              set_type: "volume"),
+                                              set_type: "volume"
+                                              menu_type: "normal"),
                       id: "record-btn", 
                       class: "btn btn-primary" do %>
           このメニューで記録する
