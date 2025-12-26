@@ -9,7 +9,8 @@ class TrainingRecordsController < ApplicationController
       weight: params[:weight],
       reps:   params[:reps],
       sets:   params[:sets],
-      set_type: params[:set_type]
+      set_type: params[:set_type],
+      menu_type: params[:menu_type]
     )
   end
 
