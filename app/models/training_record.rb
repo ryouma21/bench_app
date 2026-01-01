@@ -2,6 +2,7 @@ class TrainingRecord < ApplicationRecord
   belongs_to :user
 
   enum set_type: { measurement: 0, volume: 1 }
+  enum menu_type: { free: 0, normal: 1, lighter: 2, heavier: 3 }
   scope :measurement_records, -> { where(set_type: :measurement) }
   scope :volume_records,      -> { where(set_type: :volume) }
 
