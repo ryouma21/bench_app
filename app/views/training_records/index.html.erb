@@ -10,7 +10,23 @@
     <% @training_records.each do |record| %>
       <div class="card record-card">
         <div class="record-header">
-          <span class="record-date"><%= record.training_date.strftime("%Y/%m/%d") %></span>
+          <div class="record-left">
+            <span class="record-date"><%= record.training_date.strftime("%Y/%m/%d") %></span>
+
+            <span class="badge badge-set-<%= record.set_type %>">
+              <%= record.measurement? ? "測定" : "ボリューム" %>
+            </span>
+
+            <span class="badge badge-menu-<%= record.menu_type %>">
+              <%= case record.menu_type
+                  when "normal"  then "通常"
+                  when "lighter" then "軽め"
+                  when "heavier" then "重め"
+                  else "自由"
+                  end %>
+            </span>
+          </div>
+
           <div class="record-actions">
             <%= link_to "詳細", training_record_path(record), class: "mini-btn mini-btn-blue" %>
             <%= link_to "編集", edit_training_record_path(record), class: "mini-btn mini-btn-green" %>
