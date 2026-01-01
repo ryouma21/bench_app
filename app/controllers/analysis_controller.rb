@@ -3,9 +3,10 @@ class AnalysisController < ApplicationController
     # ① グラフ用：1日1件の記録（直近5日）
     graph_records = current_user.training_records
                                 .valid_measurement_records 
-                                .order(training_date: :desc)
+                                .recorder(training_date: :desc)# 最新順で5件取る
                                 .limit(5)
-                                .reverse
+                                .to_a
+                                .sort_by(&:training_date) # 表示は古い→新しい
 
     # ② 1RM配列
     @one_rm_values = graph_records.map(&:estimated_one_rm).compact
