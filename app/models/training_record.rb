@@ -52,6 +52,7 @@ class TrainingRecord < ApplicationRecord
 
   # 測定（measurement）だけを分析に使うためのスコープ
   scope :latest_measurement_per_day, -> {
+    measurement_value = TrainingRecord.set_types[:measurement] # => 0
   select("training_records.*")
     .joins(<<~SQL)
       INNER JOIN (
@@ -60,12 +61,13 @@ class TrainingRecord < ApplicationRecord
         WHERE weight IS NOT NULL
           AND reps IS NOT NULL
           AND weight >= 30
-          AND set_type = 'measurement'
+          AND set_type = #{measurement_value}
         GROUP BY training_date
       ) AS daily
       ON training_records.training_date = daily.training_date
       AND training_records.created_at = daily.max_created_at
     SQL
+    .where(set_type: :measurement)
 }
 # 分析で扱いやすい形（並び順）にする
 scope :valid_measurement_records, -> {
