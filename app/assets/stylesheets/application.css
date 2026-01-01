@@ -170,3 +170,38 @@ body {
     font-size: 13px;
   }
 }
+/* 日付 + バッジを横並びにする */
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.record-left{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap; /* 画面が狭いとき折り返す */
+}
+
+/* バッジ共通 */
+.badge{
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.6;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+}
+
+/* 種別（set_type） */
+.badge-set-measurement { background: rgba(255, 170, 0, 0.18); }
+.badge-set-volume      { background: rgba(0, 160, 255, 0.18); }
+
+/* メニュー種別（menu_type） */
+.badge-menu-free    { background: rgba(255,255,255,0.10); }
+.badge-menu-normal  { background: rgba(0, 220, 160, 0.18); }
+.badge-menu-lighter { background: rgba(255, 230, 0, 0.18); }
+.badge-menu-heavier { background: rgba(255, 80, 80, 0.18); }
