@@ -8,13 +8,19 @@
       <%= form_with model: @training_record, local: true do |f| %>
         <%= render "shared/error_messages", object: @training_record %>
         <%= f.hidden_field :menu_type %>
-
+        
         <div class="form-group">
-          <label>記録の種類</label>
-          <%= f.select :set_type,
-                [["測定（分析に使う）", "measurement"], ["通常（ボリューム）", "volume"]],
-                {},
-                class: "form-input" %>
+          <p class="form-label">記録の種類</p>
+
+          <label class="radio-label">
+            <%= f.radio_button :set_type, "volume" %>
+            通常トレ（メニュー消化）
+          </label>
+
+          <label class="radio-label">
+            <%= f.radio_button :set_type, "measurement" %>
+            測定用（1〜3回）
+          </label>
         </div>
 
         <div class="form-group">
