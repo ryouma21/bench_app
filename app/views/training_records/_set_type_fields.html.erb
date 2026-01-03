@@ -1,0 +1,13 @@
+<div class="form-group">
+  <p class="form-label">記録の種類</p>
+
+  <label class="radio-label">
+    <%= f.radio_button :set_type, "volume" %>
+    通常トレ（メニュー消化）
+  </label>
+
+  <label class="radio-label">
+    <%= f.radio_button :set_type, "measurement" %>
+    測定用（1〜3回）
+  </label>
+</div>
