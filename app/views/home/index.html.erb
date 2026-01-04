@@ -84,7 +84,7 @@
         <p class="trend-message"><%= @measurement_recommendation %></p>
       <% end %>
       <!-- 測定ボタン 記録が1件以上ある時だけ出す -->
-      <% if @show_measurement_button && current_user.training_records.exists?%>
+      <% if @today_menu.present? && @show_measurement_button && current_user.training_records.exists?%>
         <div class="button-group">
           <%= link_to new_training_record_path(set_type: "measurement", menu_type: "free"),
                       class: "btn btn-primary" do %>
