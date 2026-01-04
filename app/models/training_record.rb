@@ -3,6 +3,12 @@ class TrainingRecord < ApplicationRecord
 
   enum set_type: { measurement: 0, volume: 1 }
   enum menu_type: { free: 0, normal: 1, lighter: 2, heavier: 3 }
+
+  before_validation :set_default_menu_type, on: :create
+  def set_default_menu_type
+    self.menu_type = :free if menu_type.blank?
+  end
+
   scope :measurement_records, -> { where(set_type: :measurement) }
   scope :volume_records,      -> { where(set_type: :volume) }
 
