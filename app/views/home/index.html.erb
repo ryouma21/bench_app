@@ -64,6 +64,19 @@
             メニューを作成できませんでした。
             記録をもう少し追加してみてください。
           </div>
+
+          <!-- ★救済導線：必ず次の行動を用意する -->
+          <div class="button-group mt-3">
+            <%= link_to new_training_record_path(set_type: "measurement", menu_type: "free"),
+                        class: "btn btn-primary" do %>
+              測定用（1〜3回）を記録する
+            <% end %>
+
+            <%= link_to new_training_record_path(set_type: "volume", menu_type: "free"),
+                        class: "btn btn-secondary" do %>
+              通常の記録を追加する
+            <% end %>
+          </div>
         </section>
       <% end %>
       <!-- 測定案内メッセージ（あれば表示） -->
