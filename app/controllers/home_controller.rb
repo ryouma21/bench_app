@@ -21,7 +21,7 @@ class HomeController < ApplicationController
     end
 
     # ① valid_records を取得（TrainingRecordモデルのスコープを使用）
-    records = current_user.training_records.measurement_records.valid_records
+    records = current_user.training_records.valid_measurement_records
 
     # 記録がゼロ or 1RMがない → メニュー作成不可
     if records.blank?
