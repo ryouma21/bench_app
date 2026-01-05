@@ -33,19 +33,20 @@ class TrainingRecord < ApplicationRecord
     where.not(weight: nil, reps: nil)
       .where("weight >= 30")
   }
-  # 1日1件（最新）のみ抽出
+  # 1日1件（最新）のみ抽出（ユーザー単位で）
   scope :latest_per_day, -> {
     select("training_records.*")
       .joins(<<~SQL)
         INNER JOIN (
-          SELECT training_date, MAX(created_at) AS max_created_at
+          SELECT user_id, training_date, MAX(created_at) AS max_created_at
           FROM training_records
           WHERE weight IS NOT NULL
             AND reps IS NOT NULL
             AND weight >= 30
-          GROUP BY training_date
+          GROUP BY user_id, training_date
         ) AS daily
-        ON training_records.training_date = daily.training_date
+        ON training_records.user_id = daily.user_id
+        AND training_records.training_date = daily.training_date
         AND training_records.created_at = daily.max_created_at
       SQL
   }
