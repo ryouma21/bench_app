@@ -96,15 +96,6 @@ scope :valid_measurement_records, -> {
     where(training_date: days.days.ago.to_date..Date.today)
   }
 
-  # フェーズ0用 reference_1rm
-  scope :reference_one_rm, -> {
-    recent_days(14)
-      .map(&:estimated_one_rm)
-      .compact
-      .max
-  }
-
-
   private
 
   def set_total_volume
