@@ -33,19 +33,20 @@ class TrainingRecord < ApplicationRecord
     where.not(weight: nil, reps: nil)
       .where("weight >= 30")
   }
-  # 1日1件（最新）のみ抽出
+  # 1日1件（最新）のみ抽出（ユーザー単位で）
   scope :latest_per_day, -> {
     select("training_records.*")
       .joins(<<~SQL)
         INNER JOIN (
-          SELECT training_date, MAX(created_at) AS max_created_at
+          SELECT user_id, training_date, MAX(created_at) AS max_created_at
           FROM training_records
           WHERE weight IS NOT NULL
             AND reps IS NOT NULL
             AND weight >= 30
-          GROUP BY training_date
+          GROUP BY user_id, training_date
         ) AS daily
-        ON training_records.training_date = daily.training_date
+        ON training_records.user_id = daily.user_id
+        AND training_records.training_date = daily.training_date
         AND training_records.created_at = daily.max_created_at
       SQL
   }
@@ -56,24 +57,26 @@ class TrainingRecord < ApplicationRecord
     .order(:training_date)
   }
 
-  # 測定（measurement）だけを分析に使うためのスコープ
+  # 測定（measurement）だけを分析に使うためのスコープ（ユーザー単位で）
   scope :latest_measurement_per_day, -> {
     measurement_value = TrainingRecord.set_types[:measurement] # => 0
-  select("training_records.*")
-    .joins(<<~SQL)
-      INNER JOIN (
-        SELECT training_date, MAX(created_at) AS max_created_at
-        FROM training_records
-        WHERE weight IS NOT NULL
-          AND reps IS NOT NULL
-          AND weight >= 30
-          AND set_type = #{measurement_value}
-        GROUP BY training_date
-      ) AS daily
-      ON training_records.training_date = daily.training_date
-      AND training_records.created_at = daily.max_created_at
-    SQL
-    .where(set_type: :measurement)
+
+    select("training_records.*")
+      .joins(<<~SQL)
+        INNER JOIN (
+          SELECT user_id, training_date, MAX(created_at) AS max_created_at
+          FROM training_records
+          WHERE weight IS NOT NULL
+            AND reps IS NOT NULL
+            AND weight >= 30
+            AND set_type = #{measurement_value}
+          GROUP BY  user_id, training_date
+        ) AS daily
+        ON training_records.user_id = daily.user_id
+        AND training_records.training_date = daily.training_date
+        AND training_records.created_at = daily.max_created_at
+      SQL
+      .where(set_type: :measurement)
 }
 # 分析で扱いやすい形（並び順）にする
 scope :valid_measurement_records, -> {
@@ -92,15 +95,6 @@ scope :valid_measurement_records, -> {
   scope :recent_days, ->(days) {
     where(training_date: days.days.ago.to_date..Date.today)
   }
-
-  # フェーズ0用 reference_1rm
-  scope :reference_one_rm, -> {
-    recent_days(14)
-      .map(&:estimated_one_rm)
-      .compact
-      .max
-  }
-
 
   private
 
