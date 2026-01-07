@@ -25,6 +25,15 @@ class TrainingRecord < ApplicationRecord
     (weight * (1 + reps.to_f / 30)).round(1)
   end
 
+  # 2.5kg刻みに丸める（共通ルール）
+  PLATE = 2.5
+
+  def self.round_to_plate(value, plate = PLATE)
+    return nil if value.nil?
+    ((value.to_f / plate).round) * plate
+  end
+
+
   # =========================
   #  分析用スコープ群
   # =========================
