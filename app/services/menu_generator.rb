@@ -23,7 +23,7 @@ class MenuGenerator
 
     base.merge(
       percentage: percent,
-      weight: rounded_weight(base_weight_base_one_rm(base[:type]) * percent)
+      weight: TrainingRecord.round_to_plate(base_weight_base_one_rm(base[:type]) * percent)
     )
   end
 
@@ -53,10 +53,6 @@ class MenuGenerator
     else
       p
     end
-  end
-
-  def rounded_weight(value)
-    (value / PLATE).round * PLATE
   end
 end
 
