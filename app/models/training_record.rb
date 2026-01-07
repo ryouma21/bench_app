@@ -21,9 +21,18 @@ class TrainingRecord < ApplicationRecord
   def estimated_one_rm
     # 重量か回数が入っていなかったら計算できないので nil を返す
     return nil if weight.blank? || reps.blank?
-    # reps.to_f として小数計算にする（整数同士だと割り算がズレるため）小数第1位までに丸める（例：93.333... → 93.3）
-    (weight * (1 + reps.to_f / 30)).round(1)
+    raw = weight * (1 + reps.to_f / 30)
+    self.class.round_to_plate(raw)
   end
+
+  # 2.5kg刻みに丸める（共通ルール）
+  PLATE = 2.5
+
+  def self.round_to_plate(value, plate = PLATE)
+    return nil if value.nil?
+    ((value.to_f / plate).round) * plate
+  end
+
 
   # =========================
   #  分析用スコープ群
