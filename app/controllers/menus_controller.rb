@@ -12,7 +12,7 @@ class MenusController < ApplicationController
   private
 
   def build_menu(intensity)
-    records = current_user.training_records.measurement_records.valid_records
+    records = current_user.training_records.valid_measurement_records
     return {error: "measurement_required"} if records.blank? || records.last&.estimated_one_rm.nil?
 
     analyzer = TrendAnalyzerPhase0.new(records)
