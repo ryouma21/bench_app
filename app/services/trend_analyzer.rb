@@ -1,8 +1,8 @@
 class TrendAnalyzer
   def initialize(records)
-    # records には valid_records を入れる想定
+    # records には valid_measurement_records（測定のみ・1日1件・nilなし）を入れる想定
     @records = records
-    @one_rms = records.map(&:estimated_one_rm).compact
+    @one_rms = records.map(&:estimated_one_rm)
   end
 
   # 外部から呼ばれるメソッド

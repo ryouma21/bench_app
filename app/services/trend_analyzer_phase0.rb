@@ -38,7 +38,7 @@ class TrendAnalyzerPhase0
     rms = @records
             .recent_days(DAYS)
             .map(&:estimated_one_rm)
-            .compact
+
 
     return nil if rms.empty?
     rms.sum / rms.size
@@ -50,7 +50,6 @@ class TrendAnalyzerPhase0
     @records
       .recent_days(DAYS)
       .map(&:estimated_one_rm)
-      .compact
       .max
   end
 
