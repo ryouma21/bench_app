@@ -17,11 +17,15 @@ class TrainingRecordsController < ApplicationController
   def index
     @training_records = current_user.training_records.order(training_date: :desc, created_at: :desc)
 
-    # 1RMの配列（nilを除外）
-    @one_rm_values = @training_records.map { |r| r.estimated_one_rm }.compact
+    # 1RMグラフ用：測定かつ有効な記録だけ（nilが混ざらない前提）
+    one_rm_records = current_user.training_records
+                                .valid_measurement_records
+
+    @one_rm_values = one_rm_records.map(&:estimated_one_rm)
 
     # 日付の配列（グラフの横軸）
-    @one_rm_dates = @training_records.map { |r| r.training_date.strftime("%Y/%m/%d") }
+    @one_rm_dates = one_rm_records.map { |r| r.training_date.strftime("%Y/%m/%d") }
+
 
     @weekly_volume = TrainingRecord.weekly_volume(current_user)
   end
