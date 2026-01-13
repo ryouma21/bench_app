@@ -4,7 +4,8 @@ class AnalysisController < ApplicationController
     graph_records = current_user.training_records
                                 .valid_measurement_records 
                                 .reorder(training_date: :desc)# 最新順で5件取る
-                                .last(5)
+                                 .limit(5)
+                                .reverse # 表示用に古い→新しいにする
 
     # ② 1RM配列
     @one_rm_values = graph_records.map(&:estimated_one_rm).compact
