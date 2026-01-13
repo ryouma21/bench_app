@@ -8,7 +8,7 @@ class AnalysisController < ApplicationController
                                 .reverse # 表示用に古い→新しいにする
 
     # ② 1RM配列
-    @one_rm_values = graph_records.map(&:estimated_one_rm).compact
+    @one_rm_values = graph_records.map(&:estimated_one_rm)
 
     # ③ 日付配列
     @one_rm_dates = graph_records.map { |r| r.training_date.strftime("%Y/%m/%d") }
