@@ -19,7 +19,7 @@
 
         <div class="form-group">
           <%= f.label :weight, "重量(kg)" %>
-          <%= f.number_field :weight, class: "form-input" %>
+          <%= f.number_field :weight, class: "form-input", step: 0.5, min: 0%>
         </div>
 
         <div class="form-group">
